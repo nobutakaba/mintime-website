@@ -550,6 +550,12 @@
             <h4 class="mbr-section-subtitle mbr-fonts-style align-center mb-0 mt-4 display-7">下記のフォームに入力頂きExcelファイルをダウンロードし、データを入力した後<br>アップデートしてください、無料でデータを可視化することができます。</h4>
         </div>
 
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-8 mx-auto text-center">
+                <a href="【ここにExcelテンプレートのURLを記載してください】" class="btn btn-secondary display-7">テンプレートExcelをダウンロード</a>
+            </div>
+        </div>
+
         <div class="row justify-content-center mt-4">
             <div class="col-lg-8 mx-auto mbr-form" data-form-type="formoid">
                 <form action="https://formspree.io/f/YOUR_FORMSPREE_FORM_ID" method="POST" class="mbr-form form-with-styler" data-form-title="Form Name" enctype="multipart/form-data">
@@ -574,10 +580,6 @@
                             <textarea name="textarea" placeholder="メッセージ" data-form-field="textarea" class="form-control" id="textarea-form02-6"></textarea>
                         </div>
                         
-                        <div class="col-12 form-group mb-3 text-center">
-                            <a href="javascript:void(0);" id="downloadExcelButton" class="btn btn-secondary display-7" data-download-url="【ここにExcelテンプレートのURLを記載してください】" style="pointer-events: none; opacity: 0.6;">テンプレートExcelをダウンロード</a>
-                        </div>
-
                         <div class="col-12 form-group mb-3" data-for="excel_file">
                             <label for="excel_file-form02-6" class="form-label">Excelファイルを選択してアップロード：</label>
                             <input type="file" name="excel_file" id="excel_file-form02-6" class="form-control">
@@ -592,34 +594,6 @@
         </div>
     </div>
 </section>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const nameInput = document.getElementById('name-form02-6');
-        const emailInput = document.getElementById('email-form02-6');
-        const downloadButton = document.getElementById('downloadExcelButton');
-        const downloadUrl = downloadButton.getAttribute('data-download-url');
-
-        function checkInputs() {
-            if (nameInput.value.trim() !== '' && emailInput.value.trim() !== '') {
-                downloadButton.style.pointerEvents = 'auto'; // クリック可能にする
-                downloadButton.style.opacity = '1'; // 不透明度を元に戻す
-                downloadButton.href = downloadUrl; // ダウンロードURLを設定
-            } else {
-                downloadButton.style.pointerEvents = 'none'; // クリック不可にする
-                downloadButton.style.opacity = '0.6'; // 半透明にする
-                downloadButton.href = 'javascript:void(0);'; // 無効なリンクを設定
-            }
-        }
-
-        // 名前とEmailの入力フィールドが変更されるたびにチェック
-        nameInput.addEventListener('input', checkInputs);
-        emailInput.addEventListener('input', checkInputs);
-
-        // ページ読み込み時に初期状態をチェック（もし入力済みの場合は有効にするため）
-        checkInputs();
-    });
-</script>
 
 <section data-bs-version="5.1" class="contacts2 map1 cid-tLdYHD757A" id="contacts02-9">
 
