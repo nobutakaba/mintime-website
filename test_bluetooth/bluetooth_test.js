@@ -16,12 +16,14 @@ scanButton.addEventListener('click', async () => {
 
     try {
         // --- 1. デバイスの選択 ---
+        // マウスのHIDサービス(0x1812)と、以前のテストで使ったサービスをoptionalServicesで宣言
         const device = await navigator.bluetooth.requestDevice({
              acceptAllDevices: true,
              optionalServices: [
                  'generic_access',       // 0x1800
                  'device_information',   // 0x180A
-                 'battery_service'       // 0x180F
+                 'human_interface_device', // 0x1812: マウス操作情報が格納されるサービス
+                 'battery_service'       // 0x180F (マウスのバッテリーレベル取得に必要かもしれません)
              ]
         });
 
@@ -37,35 +39,62 @@ scanButton.addEventListener('click', async () => {
 
         const gattServer = await device.gatt.connect();
 
-        resultElement.innerHTML += '<p style="color: green;"><strong>接続成功! データ取得中...</strong></p>';
+        resultElement.innerHTML += '<p style="color: green;"><strong>接続成功! サービスの取得中...</strong></p>';
 
-        // --- 3. 特定のサービス(0x1800)を取得 ---
-        const genericAccessService = await gattServer.getPrimaryService('generic_access');
-        
-        // --- 4. デバイス名 (0x2A00) のキャラクタリスティックを取得 ---
-        // 修正点: 標準名ではなく、UUIDエイリアス(0x2A00)を使用
-        const deviceNameCharacteristic = await genericAccessService.getCharacteristic(0x2A00);
+        // --- 3. ターゲットサービス(HID: 0x1812)を取得 ---
+        // 'human_interface_device'サービスオブジェクトを取得します
+        const hidService = await gattServer.getPrimaryService('human_interface_device');
 
-        // --- 5. データの読み出し！ ---
-        const value = await deviceNameCharacteristic.readValue();
-        
-        // 取得したデータ(DataView)を文字列に変換 (Bluetooth名はUTF-8で格納されている)
-        const deviceName = new TextDecoder('utf-8').decode(value);
-
-        // --- 6. 結果の表示 ---
         resultElement.innerHTML += `
-            <h3>✅ データの読み出し結果:</h3>
-            <p style="font-size: 1.1em; color: blue;">
-                <strong>デバイス名 (0x2A00) の中身:</strong> ${deviceName}
-            </p>
-            <p>※ デバイス名以外は、通常、生のデータ(数値など)を解析するコードが必要です。</p>
+            <h3>ターゲットサービス: HIDサービス (0x1812)</h3>
+            <p style="font-weight: bold;">その中のキャラクタリスティック一覧:</p>
+            <ul></ul>
         `;
+        const ulElement = resultElement.querySelector('ul');
+
+        // --- 4. サービス内のすべてのキャラクタリスティックを取得 ---
+        const characteristics = await hidService.getCharacteristics();
+
+        if (characteristics.length === 0) {
+            ulElement.innerHTML = '<li>キャラクタリスティックが見つかりませんでした。</li>';
+        }
+
+        for (const characteristic of characteristics) {
+            const uuid = characteristic.uuid;
+            let charName = uuid;
+
+            // HIDサービスで一般的なキャラクタリスティックUUIDの場合、わかりやすい名前に変換
+            if (uuid === 'report_map') {
+                charName = 'レポートマップ (0x2A4B)'; // デバイスの機能定義
+            } else if (uuid === 'hid_information') {
+                charName = 'HID情報 (0x2A4A)';
+            } else if (uuid === 'report') {
+                charName = 'レポート (0x2A4D)'; // 操作データが流れてくるキャラクタリスティック
+            } else if (uuid === 'protocol_mode') {
+                charName = 'プロトコルモード (0x2A4E)';
+            }
+            
+            // キャラクタリスティックのUUIDとプロパティを表示
+            const props = characteristic.properties;
+            const propertyList = Object.keys(props).filter(prop => props[prop]).join(', ');
+
+            ulElement.innerHTML += `
+                <li>
+                    <strong>${charName}</strong> (${uuid})<br>
+                    - プロパティ: ${propertyList || 'なし'}
+                </li>
+            `;
+        }
 
     } catch(error) {
         // エラー処理
         console.error('エラーが発生しました:', error);
-        // エラーメッセージを詳細に表示
-        resultElement.innerHTML = `<p style="color: red;"><strong>エラーが発生しました:</strong> ${error.message}</p>`;
-        resultElement.innerHTML += `<p>原因: ${error.message.includes('getCharacteristic') ? 'キャラクタリスティック名が無効か、デバイスが切断されました。' : 'その他のBluetoothエラーです。'}</p>`;
+        if (error.name === 'NotFoundError') {
+            resultElement.innerHTML = '<p>スキャンがキャンセルされました。</p>';
+        } else if (error.message.includes('No Services matching UUID')) {
+            resultElement.innerHTML = `<p style="color: red;"><strong>エラーが発生しました:</strong> マウスがHIDサービス (0x1812) を公開していません。または、セキュリティ制限のためアクセスが拒否されました。</p>`;
+        } else {
+            resultElement.innerHTML = `<p style="color: red;"><strong>エラーが発生しました:</strong> ${error.message}</p>`;
+        }
     }
 });
