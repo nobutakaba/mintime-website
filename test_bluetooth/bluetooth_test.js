@@ -1,7 +1,7 @@
 // HTMLの要素を取得
 const scanButton = document.getElementById('scanButton');
 const resultElement = document.getElementById('result');
-let bluetoothDevice; // 接続したデバイスを保持するためのグローバル変数
+let bluetoothDevice;
 
 /**
  * サービス情報をHTMLに表示するためのヘルパー関数
@@ -23,12 +23,16 @@ scanButton.addEventListener('click', async () => {
     }
 
     try {
-        // --- 1. デバイスの選択 ---
-        // Web Bluetooth APIは、セキュリティのため、特定のサービスを持つデバイスのみをフィルタリングすることを推奨しますが、
-        // 今回はすべてのサービスを受け入れることで、テレビの持つサービスを広範囲に検出します。
+        // --- 1. デバイスの選択（修正箇所） ---
         const device = await navigator.bluetooth.requestDevice({
              acceptAllDevices: true,
-             optionalServices: [] // すべてのサービスを検出するために空の配列を渡します
+             // 接続後にサービスアクセスを可能にするため、最低限必要なサービスや一般的なサービスを宣言します
+             optionalServices: [
+                 'generic_access',       // 0x1800: 最も基本的なデバイス情報
+                 'device_information',   // 0x180A: デバイスのハードウェア情報
+                 'battery_service'       // 0x180F: バッテリー情報
+                 // その他のサービスも必要に応じてここに追加します
+             ]
         });
 
         bluetoothDevice = device;
@@ -47,6 +51,7 @@ scanButton.addEventListener('click', async () => {
         resultElement.innerHTML += '<p style="color: green;"><strong>接続成功! サービスの取得中...</strong></p>';
 
         // --- 4. すべてのサービスを取得 ---
+        // optionalServicesで宣言したことにより、この処理がセキュリティチェックを通過します
         const services = await gattServer.getPrimaryServices();
 
         // サービス一覧を表示するためのリストの準備
@@ -58,15 +63,16 @@ scanButton.addEventListener('click', async () => {
         }
 
         for (const service of services) {
-            // サービス名（UUID）を取得して表示
             const uuid = service.uuid;
             let serviceName = uuid;
 
-            // 一般的なサービスUUIDの場合、わかりやすい名前に変換
+            // 一般的なサービスUUIDの場合、わかりやすい名前に変換 (前回と同じ)
             if (uuid === 'battery_service') {
                 serviceName = 'バッテリーサービス (0x180F)';
             } else if (uuid === 'device_information') {
                 serviceName = 'デバイス情報サービス (0x180A)';
+            } else if (uuid === 'generic_access') {
+                serviceName = 'ジェネリックアクセス (0x1800)';
             }
             
             ulElement.innerHTML += `<li>${serviceName} (${uuid})</li>`;
@@ -79,7 +85,7 @@ scanButton.addEventListener('click', async () => {
             resultElement.innerHTML = '<p>スキャンがキャンセルされました。</p>';
         } else {
             resultElement.innerHTML = `<p style="color: red;"><strong>エラーが発生しました:</strong> ${error.message}</p>`;
-            resultElement.innerHTML += '<p>デバイスのBluetooth設定を確認するか、BLE非対応の可能性があります。</p>';
+            resultElement.innerHTML += '<p>ブラウザコンソールを確認してください。デバイスのBluetooth設定を確認するか、BLE非対応の可能性があります。</p>';
         }
     }
 });
