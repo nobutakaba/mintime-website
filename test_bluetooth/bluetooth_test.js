@@ -43,7 +43,8 @@ scanButton.addEventListener('click', async () => {
         const genericAccessService = await gattServer.getPrimaryService('generic_access');
         
         // --- 4. デバイス名 (0x2A00) のキャラクタリスティックを取得 ---
-        const deviceNameCharacteristic = await genericAccessService.getCharacteristic('device_name');
+        // 修正点: 標準名ではなく、UUIDエイリアス(0x2A00)を使用
+        const deviceNameCharacteristic = await genericAccessService.getCharacteristic(0x2A00);
 
         // --- 5. データの読み出し！ ---
         const value = await deviceNameCharacteristic.readValue();
@@ -63,11 +64,8 @@ scanButton.addEventListener('click', async () => {
     } catch(error) {
         // エラー処理
         console.error('エラーが発生しました:', error);
-        if (error.name === 'NotFoundError') {
-            resultElement.innerHTML = '<p>スキャンがキャンセルされました。</p>';
-        } else {
-            resultElement.innerHTML = `<p style="color: red;"><strong>エラーが発生しました:</strong> ${error.message}</p>`;
-            resultElement.innerHTML += '<p>データ読み出しが拒否されたか、デバイスが切断されました。</p>';
-        }
+        // エラーメッセージを詳細に表示
+        resultElement.innerHTML = `<p style="color: red;"><strong>エラーが発生しました:</strong> ${error.message}</p>`;
+        resultElement.innerHTML += `<p>原因: ${error.message.includes('getCharacteristic') ? 'キャラクタリスティック名が無効か、デバイスが切断されました。' : 'その他のBluetoothエラーです。'}</p>`;
     }
 });
