@@ -3,98 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Bluetooth API テスト</title>
+    <title>PWA 生体認証ガード付きテストページ</title>
     <style>
         body { font-family: sans-serif; padding: 20px; }
-        button { font-size: 1.2rem; padding: 10px; cursor: pointer; background-color: #4CAF50; color: white; border: none; border-radius: 5px; }
-        button:hover { background-color: #45a049; }
-        hr { margin: 20px 0; }
-        h2 { border-bottom: 2px solid #eee; padding-bottom: 5px; }
-        pre { background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; }
+        button { font-size: 1.2rem; padding: 10px; cursor: pointer; }
+        pre { background-color: #f4f4f4; padding: 10px; border-radius: 5px; }
+        
+        /* 認証が成功するまで、コンテンツを隠す */
+        #protectedContent { display: none; } 
+        
+        .loading { color: gray; }
         .error { color: red; font-weight: bold; }
         .success { color: green; font-weight: bold; }
     </style>
 </head>
-<body>
+<body onload="checkWebAuthnSupport()">
 
-    <h1>📱 Web Bluetooth API テストページ</h1>
-    <p>下のボタンを押すと、Bluetoothデバイスの選択ダイアログが表示されます。</p>
-    <p>🚨 **注意: このAPIはHTTPS環境でのみ動作します。**</p>
+    <h1>🔑 WebAuthn 認証ガード</h1>
+    <p id="initialStatus" class="loading">ページを安全に開くため、生体認証を要求しています...</p>
+
+    <div id="protectedContent">
+        <hr>
+        <h2>Web Bluetooth API テストページ（認証済み）</h2>
+        <p>下のボタンを押すと、Bluetoothデバイスの選択ダイアログが表示されます。</p>
+         
+        <button id="scanButton">1. デバイスをスキャン</button>
     
-    <button id="scanButton">1. デバイスをスキャン</button>
-
-    <hr>
-
-    <h2>結果</h2>
-    <pre id="result">（ここにデバイス情報が表示されます）</pre>
+        <hr>
+    
+        <h2>結果</h2>
+        <pre id="result">（ここにデバイス情報が表示されます）</pre>
+    </div>
 
     <script>
-        const scanButton = document.getElementById('scanButton');
+        const protectedContent = document.getElementById('protectedContent');
+        const initialStatus = document.getElementById('initialStatus');
         const resultElement = document.getElementById('result');
+        const scanButton = document.getElementById('scanButton'); // Bluetoothボタン
+        
+        // **デモのための認証情報ID** (本来はサーバーに登録済みのユーザーのID)
+        const KNOWN_CREDENTIAL_ID = new Uint8Array([64, 66, 25, 78, 168, 226, 174, 180, 150, 200, 100, 50, 10, 5, 255]); 
 
-        /**
-         * 結果表示エリアを更新する関数
-         * @param {string} message - 表示するメッセージ
-         * @param {boolean} isError - エラーメッセージかどうか
-         */
-        function updateResult(message, isError = false) {
-            resultElement.className = isError ? 'error' : (isError === false ? 'success' : '');
-            resultElement.textContent = message;
+        function updateStatus(element, message, isError = false) {
+            element.className = isError ? 'error' : 'success';
+            element.textContent = message;
         }
 
         /**
-         * Web Bluetooth API を使ってデバイスをスキャンする関数
+         * ページロード時に自動でWebAuthn認証を実行する
          */
-        async function scanForDevice() {
-            updateResult("スキャン中... デバイス選択ダイアログが表示されます。");
-            
+        async function requireAuthenticationOnLoad() {
             try {
-                // ブラウザにBluetoothデバイスの選択を要求
-                const device = await navigator.bluetooth.requestDevice({
-                    // 検索対象のフィルター条件をここに記述します
-                    // デモのため、今回は全てのBLEデバイスを表示（推奨はされません）
-                    // 実際のアプリでは services: ['battery_service'] など、必要なものを指定します
-                    acceptAllDevices: true 
-                    // optionalServices: ['battery_service'] // 必要に応じて追加
+                // 認証時にサーバーから取得したと仮定するオプション
+                const publicKeyCredentialRequestOptions = {
+                    // サーバーが生成するランダムなチャレンジ
+                    challenge: new Uint8Array([0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f]),
+                    rpId: window.location.hostname,
+                    // 以前登録した認証情報IDのリスト（ここではデモ値を使用）
+                    allowCredentials: [{
+                        type: 'public-key',
+                        id: KNOWN_CREDENTIAL_ID, // サーバーに登録済みのユーザーのCredential ID
+                    }],
+                    userVerification: 'required', 
+                    timeout: 60000
+                };
+
+                // 生体認証プロンプトが表示される
+                const assertion = await navigator.credentials.get({
+                    publicKey: publicKeyCredentialRequestOptions
                 });
 
-                // ユーザーがデバイスを選択し、接続が成功した場合
-                const deviceDetails = `
-✅ デバイスが見つかりました！
----------------------------------
-名前: ${device.name || '名前なし'}
-ID: ${device.id}
-接続済み: ${device.gatt.connected ? 'はい' : 'いいえ'}
-
----
-※これは選択されたデバイスの情報であり、接続処理は行われていません。
-`;
-                updateResult(deviceDetails, false);
+                // ✅ 認証成功
+                updateStatus(initialStatus, "✅ 生体認証に成功しました。コンテンツを表示します。", false);
+                protectedContent.style.display = 'block';
+                
+                // Bluetooth機能のイベントリスナーを設定 (元のコードで要求されていた機能)
+                setupBluetoothListener(); 
 
             } catch (error) {
-                let errorMessage;
-
-                if (error.name === 'NotFoundError') {
-                    errorMessage = "ユーザーがデバイス選択をキャンセルしたか、対象デバイスが見つかりませんでした。";
-                } else if (error.name === 'NotAllowedError') {
-                    errorMessage = "Web Bluetoothの権限が拒否されました。または、HTTPS環境ではありません。";
-                } else {
-                    errorMessage = `スキャン中にエラーが発生しました: ${error.message}`;
-                }
-                
-                updateResult(`❌ エラー:\n${errorMessage}`, true);
-                console.error("Web Bluetooth Error:", error);
+                // ❌ 認証失敗 (キャンセル、未登録、失敗など)
+                const message = `❌ 認証失敗: ${error.name} - ${error.message}`;
+                updateStatus(initialStatus, message + "\n\nページはロックされたままです。", true);
+                console.error("Authentication Error:", error);
+            }
+        }
+        
+        /**
+         * Web Bluetooth APIのイベントリスナー設定 (元の要求に基づき)
+         */
+        function setupBluetoothListener() {
+             if (navigator.bluetooth) {
+                scanButton.addEventListener('click', scanForDevice);
+                // 認証成功後のBluetoothの状態表示
+                resultElement.textContent = "Web Bluetooth機能が有効になりました。スキャンボタンを押してください。";
+            } else {
+                resultElement.textContent = "お使いのブラウザはWeb Bluetooth APIをサポートしていません。";
+                scanButton.disabled = true;
+            }
+        }
+        
+        /**
+         * Web Bluetooth API スキャン処理 (簡略版)
+         */
+        async function scanForDevice() {
+            resultElement.textContent = "スキャン中... ダイアログが表示されます。";
+            try {
+                const device = await navigator.bluetooth.requestDevice({
+                    acceptAllDevices: true 
+                });
+                resultElement.textContent = `✅ デバイスが見つかりました:\n名前: ${device.name || '名前なし'}\nID: ${device.id}`;
+            } catch (error) {
+                resultElement.textContent = `❌ スキャン失敗またはキャンセル: ${error.message}`;
             }
         }
 
-        // ボタンにイベントリスナーを追加
-        if (navigator.bluetooth) {
-            scanButton.addEventListener('click', scanForDevice);
-            updateResult("ブラウザはWeb Bluetoothをサポートしています。ボタンを押してください。", false);
-        } else {
-            updateResult("❌ エラー: お使いのブラウザはWeb Bluetooth APIをサポートしていません。", true);
-            scanButton.disabled = true;
+        /**
+         * ページロード時の初期チェック
+         */
+        function checkWebAuthnSupport() {
+            if (window.isSecureContext && navigator.credentials && navigator.credentials.get) {
+                // HTTPS接続、かつWebAuthn APIが利用可能
+                requireAuthenticationOnLoad();
+            } else {
+                // エラー: 非HTTPS環境または未対応ブラウザ
+                updateStatus(initialStatus, "❌ エラー: 生体認証はHTTPS接続が必要です。または、お使いのブラウザはWebAuthnをサポートしていません。", true);
+            }
         }
-    </script>
+
+    </script> 
 </body>
 </html>
