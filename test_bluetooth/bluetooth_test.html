@@ -6,14 +6,20 @@
     <title>Web Bluetooth API テスト</title>
     <style>
         body { font-family: sans-serif; padding: 20px; }
-        button { font-size: 1.2rem; padding: 10px; }
-        pre { background-color: #f4f4f4; padding: 10px; border-radius: 5px; }
+        button { font-size: 1.2rem; padding: 10px; cursor: pointer; background-color: #4CAF50; color: white; border: none; border-radius: 5px; }
+        button:hover { background-color: #45a049; }
+        hr { margin: 20px 0; }
+        h2 { border-bottom: 2px solid #eee; padding-bottom: 5px; }
+        pre { background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; }
+        .error { color: red; font-weight: bold; }
+        .success { color: green; font-weight: bold; }
     </style>
 </head>
 <body>
 
-    <h1>Web Bluetooth API テストページ（非公開）</h1>
+    <h1>📱 Web Bluetooth API テストページ</h1>
     <p>下のボタンを押すと、Bluetoothデバイスの選択ダイアログが表示されます。</p>
+    <p>🚨 **注意: このAPIはHTTPS環境でのみ動作します。**</p>
     
     <button id="scanButton">1. デバイスをスキャン</button>
 
@@ -22,7 +28,73 @@
     <h2>結果</h2>
     <pre id="result">（ここにデバイス情報が表示されます）</pre>
 
-    <script src="bluetooth_test.js"></script> 
+    <script>
+        const scanButton = document.getElementById('scanButton');
+        const resultElement = document.getElementById('result');
 
+        /**
+         * 結果表示エリアを更新する関数
+         * @param {string} message - 表示するメッセージ
+         * @param {boolean} isError - エラーメッセージかどうか
+         */
+        function updateResult(message, isError = false) {
+            resultElement.className = isError ? 'error' : (isError === false ? 'success' : '');
+            resultElement.textContent = message;
+        }
+
+        /**
+         * Web Bluetooth API を使ってデバイスをスキャンする関数
+         */
+        async function scanForDevice() {
+            updateResult("スキャン中... デバイス選択ダイアログが表示されます。");
+            
+            try {
+                // ブラウザにBluetoothデバイスの選択を要求
+                const device = await navigator.bluetooth.requestDevice({
+                    // 検索対象のフィルター条件をここに記述します
+                    // デモのため、今回は全てのBLEデバイスを表示（推奨はされません）
+                    // 実際のアプリでは services: ['battery_service'] など、必要なものを指定します
+                    acceptAllDevices: true 
+                    // optionalServices: ['battery_service'] // 必要に応じて追加
+                });
+
+                // ユーザーがデバイスを選択し、接続が成功した場合
+                const deviceDetails = `
+✅ デバイスが見つかりました！
+---------------------------------
+名前: ${device.name || '名前なし'}
+ID: ${device.id}
+接続済み: ${device.gatt.connected ? 'はい' : 'いいえ'}
+
+---
+※これは選択されたデバイスの情報であり、接続処理は行われていません。
+`;
+                updateResult(deviceDetails, false);
+
+            } catch (error) {
+                let errorMessage;
+
+                if (error.name === 'NotFoundError') {
+                    errorMessage = "ユーザーがデバイス選択をキャンセルしたか、対象デバイスが見つかりませんでした。";
+                } else if (error.name === 'NotAllowedError') {
+                    errorMessage = "Web Bluetoothの権限が拒否されました。または、HTTPS環境ではありません。";
+                } else {
+                    errorMessage = `スキャン中にエラーが発生しました: ${error.message}`;
+                }
+                
+                updateResult(`❌ エラー:\n${errorMessage}`, true);
+                console.error("Web Bluetooth Error:", error);
+            }
+        }
+
+        // ボタンにイベントリスナーを追加
+        if (navigator.bluetooth) {
+            scanButton.addEventListener('click', scanForDevice);
+            updateResult("ブラウザはWeb Bluetoothをサポートしています。ボタンを押してください。", false);
+        } else {
+            updateResult("❌ エラー: お使いのブラウザはWeb Bluetooth APIをサポートしていません。", true);
+            scanButton.disabled = true;
+        }
+    </script>
 </body>
 </html>
