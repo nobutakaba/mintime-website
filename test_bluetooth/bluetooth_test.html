@@ -49,10 +49,8 @@
         const resultElement = document.getElementById('result');
         const scanButton = document.getElementById('scanButton');
         
-        // 🚨 デモ用の固定値。本番環境ではサーバーが動的に管理・生成します。
-        // WebAuthnの登録・認証には、サーバーから取得したチャレンジが必要です。
+        // 🚨 デモ用の固定値。本来はサーバーが動的に管理・生成します。
         const DUMMY_USER_ID = new Uint8Array([0x4e, 0x61, 0x6d, 0x65, 0x47, 0x65, 0x6e, 0x65]); 
-        const DUMMY_CREDENTIAL_ID = new Uint8Array([64, 66, 25, 78, 168, 226, 174, 180, 150, 200, 100, 50, 10, 5, 255]); 
 
         function updateStatus(element, message, isError = false) {
             element.className = isError ? 'error' : 'success';
@@ -84,7 +82,7 @@
                 });
 
                 updateStatus(initialStatus, "✅ 認証情報が正常に登録されました！ページをリロードして自動認証を試してください。", false);
-                registerButton.style.display = 'none'; // 登録成功後はボタンを非表示に
+                registerButton.style.display = 'none';
 
             } catch (error) {
                 const message = `❌ 登録失敗: ${error.name} - ${error.message}`;
@@ -98,14 +96,14 @@
         // ==========================================================
         async function requireAuthenticationOnLoad() {
             try {
-                // 認証時にサーバーから取得したと仮定するオプション
                 const publicKeyCredentialRequestOptions = {
                     challenge: new Uint8Array([0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f]),
                     rpId: window.location.hostname,
-                    allowCredentials: [
-                        { type: 'public-key', id: DUMMY_CREDENTIAL_ID } 
-                    ],
-                    // OSの優先順位（生体認証 -> パスコード）に従うよう要求
+                    
+                    // 💡 【重要】このサイトに登録されている任意のパスキーを許可します。
+                    // これにより、QRコード表示を避け、ローカル認証（Face ID/Touch ID/パスコード）が促されます。
+                    allowCredentials: [], 
+                    
                     userVerification: 'preferred', 
                     timeout: 60000
                 };
