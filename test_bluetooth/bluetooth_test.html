@@ -3,25 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PWA 生体認証/パスコード認証ガード付きテストページ</title>
+    <title>PWA 生体認証（WebAuthn）ガード付きテストページ</title>
     <style>
         body { font-family: sans-serif; padding: 20px; }
-        button { font-size: 1.2rem; padding: 10px; cursor: pointer; }
-        pre { background-color: #f4f4f4; padding: 10px; border-radius: 5px; }
+        button { font-size: 1.1rem; padding: 8px 12px; margin: 5px 0; cursor: pointer; border-radius: 5px; }
+        #registerButton { background-color: #28a745; color: white; border: none; }
+        #scanButton { background-color: #007bff; color: white; border: none; }
+        hr { margin: 20px 0; }
+        h2 { border-bottom: 2px solid #eee; padding-bottom: 5px; }
+        pre { background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; }
         
-        /* 認証が成功するまで、コンテンツを隠す */
-        #protectedContent { display: none; } 
-        
+        /* ステータス表示用のスタイル */
         .loading { color: gray; }
         .error { color: red; font-weight: bold; }
         .success { color: green; font-weight: bold; }
+        
+        /* 認証が成功するまで、Bluetoothコンテンツを隠す */
+        #protectedContent { display: none; } 
     </style>
 </head>
 <body onload="checkWebAuthnSupport()">
 
     <h1>🔑 WebAuthn 認証ガード</h1>
-    <p id="initialStatus" class="loading">ページを安全に開くため、認証を要求しています... (Face ID/Touch IDが優先されます)</p>
-
+    <p id="initialStatus" class="loading">ページを安全に開くため、認証を要求しています... (Face ID/Touch ID/パスコード)</p>
+    
+    <button id="registerButton" style="display:none;" onclick="handleRegistration()">0. 認証情報を登録 (未登録の場合)</button>
+    
     <div id="protectedContent">
         <hr>
         <h2>Web Bluetooth API テストページ（認証済み）</h2>
@@ -38,57 +45,95 @@
     <script>
         const protectedContent = document.getElementById('protectedContent');
         const initialStatus = document.getElementById('initialStatus');
+        const registerButton = document.getElementById('registerButton');
         const resultElement = document.getElementById('result');
         const scanButton = document.getElementById('scanButton');
         
-        // 🚨 デモ用の固定値。本番環境ではサーバーが動的に管理します。
-        const KNOWN_CREDENTIAL_ID = new Uint8Array([64, 66, 25, 78, 168, 226, 174, 180, 150, 200, 100, 50, 10, 5, 255]); 
+        // 🚨 デモ用の固定値。本番環境ではサーバーが動的に管理・生成します。
+        // WebAuthnの登録・認証には、サーバーから取得したチャレンジが必要です。
+        const DUMMY_USER_ID = new Uint8Array([0x4e, 0x61, 0x6d, 0x65, 0x47, 0x65, 0x6e, 0x65]); 
+        const DUMMY_CREDENTIAL_ID = new Uint8Array([64, 66, 25, 78, 168, 226, 174, 180, 150, 200, 100, 50, 10, 5, 255]); 
 
         function updateStatus(element, message, isError = false) {
             element.className = isError ? 'error' : 'success';
             element.textContent = message;
         }
 
-        /**
-         * ページロード時に自動でWebAuthn認証を実行する
-         */
+        // ==========================================================
+        // 0. 登録処理 (Registration) - 手動実行用
+        // ==========================================================
+        async function handleRegistration() {
+            updateStatus(initialStatus, "登録処理を開始... Face ID/Touch IDを登録します。", false);
+            
+            try {
+                const publicKeyCredentialCreationOptions = {
+                    rp: { name: "My PWA App", id: window.location.hostname },
+                    user: {
+                        id: DUMMY_USER_ID,
+                        name: "demo_user@pwa.com",
+                        displayName: "PWA Demo User"
+                    },
+                    challenge: new Uint8Array([0x99, 0x93, 0x8a, 0x3d, 0x5a, 0x22, 0x7c, 0x8f, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08]), 
+                    pubKeyCredParams: [{ type: "public-key", alg: -7 }],
+                    timeout: 60000,
+                    attestation: 'none'
+                };
+
+                await navigator.credentials.create({
+                    publicKey: publicKeyCredentialCreationOptions
+                });
+
+                updateStatus(initialStatus, "✅ 認証情報が正常に登録されました！ページをリロードして自動認証を試してください。", false);
+                registerButton.style.display = 'none'; // 登録成功後はボタンを非表示に
+
+            } catch (error) {
+                const message = `❌ 登録失敗: ${error.name} - ${error.message}`;
+                updateStatus(initialStatus, message + "\n\n再試行するか、コンソールを確認してください。", true);
+                console.error("Registration Error:", error);
+            }
+        }
+
+        // ==========================================================
+        // 1. 認証処理 (Authentication) - ページロード時自動実行
+        // ==========================================================
         async function requireAuthenticationOnLoad() {
             try {
                 // 認証時にサーバーから取得したと仮定するオプション
                 const publicKeyCredentialRequestOptions = {
                     challenge: new Uint8Array([0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f]),
                     rpId: window.location.hostname,
-                    allowCredentials: [{
-                        type: 'public-key',
-                        id: KNOWN_CREDENTIAL_ID, 
-                    }],
+                    allowCredentials: [
+                        { type: 'public-key', id: DUMMY_CREDENTIAL_ID } 
+                    ],
                     // OSの優先順位（生体認証 -> パスコード）に従うよう要求
                     userVerification: 'preferred', 
                     timeout: 60000
                 };
 
                 // 💡 生体認証プロンプトが表示される
-                const assertion = await navigator.credentials.get({
+                await navigator.credentials.get({
                     publicKey: publicKeyCredentialRequestOptions
                 });
 
                 // ✅ 認証成功
-                updateStatus(initialStatus, "✅ 生体認証（またはパスコード）に成功しました。コンテンツを表示します。", false);
+                updateStatus(initialStatus, "✅ 認証に成功しました。コンテンツを表示します。", false);
                 protectedContent.style.display = 'block';
+                registerButton.style.display = 'none';
                 
                 setupBluetoothListener(); 
 
             } catch (error) {
                 // ❌ 認証失敗 (キャンセル、未登録など)
                 const message = `❌ 認証失敗: ${error.name} - ${error.message}`;
-                updateStatus(initialStatus, message + "\n\nページはロックされたままです。\n(認証プロンプト内で代替のパスコード入力が可能です。)", true);
+                updateStatus(initialStatus, message + "\n\nページはロックされたままです。\n認証情報が未登録の場合は、上の「登録」ボタンを押してください。", true);
+                registerButton.style.display = 'block'; // 認証失敗時、登録ボタンを表示
                 console.error("Authentication Error:", error);
             }
         }
         
-        /**
-         * Web Bluetooth APIのイベントリスナー設定
-         */
+        // ==========================================================
+        // 2. Web Bluetooth API 機能
+        // ==========================================================
         function setupBluetoothListener() {
              if (navigator.bluetooth) {
                 scanButton.addEventListener('click', scanForDevice);
@@ -99,9 +144,6 @@
             }
         }
         
-        /**
-         * Web Bluetooth API スキャン処理 (簡略版)
-         */
         async function scanForDevice() {
             resultElement.textContent = "スキャン中... ダイアログが表示されます。";
             try {
@@ -114,17 +156,17 @@
             }
         }
 
-        /**
-         * ページロード時の初期チェック
-         */
+        // ==========================================================
+        // 3. 初期チェックと実行
+        // ==========================================================
         function checkWebAuthnSupport() {
+            // HTTPS接続かつWebAuthn APIが利用可能かチェック
             if (window.isSecureContext && navigator.credentials && navigator.credentials.get) {
                 requireAuthenticationOnLoad();
             } else {
                 updateStatus(initialStatus, "❌ エラー: 認証はHTTPS接続が必要です。または、お使いのブラウザはWebAuthnをサポートしていません。", true);
             }
         }
-
     </script> 
 </body>
 </html>
