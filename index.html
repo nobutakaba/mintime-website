@@ -42,6 +42,49 @@
     .nav-links { display: flex; align-items: center; gap: 8px; list-style: none; }
     .nav-links a { font-size: 0.9rem; font-weight: 500; color: var(--text-mid); padding: 8px 14px; border-radius: var(--radius-sm); transition: color 0.2s, background 0.2s; }
     .nav-links a:hover { color: var(--green-primary); background: var(--green-pale); }
+
+    /* ハンバーガーボタン */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 36px; height: 36px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 100%; height: 2px;
+      background: var(--text-dark);
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* モバイルメニュー */
+    @media (max-width: 900px) {
+      .hamburger { display: flex; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        position: absolute;
+        top: 68px; left: 0; right: 0;
+        background: #fff;
+        border-bottom: 1px solid var(--border);
+        padding: 12px 16px 20px;
+        gap: 4px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 12px 16px; font-size: 1rem; border-radius: var(--radius-sm); }
+      .nav-cta { font-size: 0.82rem; padding: 8px 16px; }
+    }
     .nav-cta { display: inline-flex; align-items: center; gap: 6px; background: var(--green-primary); color: #fff !important; padding: 10px 22px; border-radius: 50px; font-size: 0.88rem; font-weight: 700; letter-spacing: 0.02em; transition: background 0.2s, transform 0.15s, box-shadow 0.2s; box-shadow: 0 2px 12px rgba(45,186,138,0.3); }
     .nav-cta:hover { background: var(--green-light); transform: translateY(-1px); }
 
@@ -57,7 +100,7 @@
     @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
     .hero h1 { font-family: var(--font-display); font-size: clamp(2.4rem, 5vw, 4.2rem); font-weight: 700; color: #fff; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 20px; }
     .hero h1 .accent-text { color: #f0ffd6; display: block; }
-    .hero-sub { font-size: clamp(1rem, 2vw, 1.2rem); color: rgba(255,255,255,0.65); font-weight: 300; max-width: 540px; margin: 0 auto 40px; }
+    .hero-sub { font-size: clamp(1.05rem, 2vw, 1.25rem); color: rgba(255,255,255,0.9); font-weight: 400; max-width: 540px; margin: 0 auto 40px; }
     .hero-cta-group { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
     .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: #fff; color: #1a7a5e; padding: 16px 34px; border-radius: 50px; font-size: 1rem; font-weight: 700; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 24px rgba(0,0,0,0.15); }
     .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
@@ -71,7 +114,7 @@
     .section-inner { max-width: 1100px; margin: 0 auto; }
     .section-label { display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--green-primary); background: var(--green-pale); padding: 5px 14px; border-radius: 50px; margin-bottom: 16px; }
     .section-title { font-family: var(--font-display); font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 700; line-height: 1.25; letter-spacing: -0.02em; color: var(--text-dark); margin-bottom: 16px; }
-    .section-sub { font-size: 1.05rem; color: var(--text-soft); font-weight: 300; max-width: 560px; }
+    .section-sub { font-size: 1.1rem; color: var(--text-mid); font-weight: 400; max-width: 560px; }
     .text-center { text-align: center; }
     .text-center .section-sub { margin: 0 auto; }
 
@@ -112,11 +155,18 @@
       margin-top: 20px;
       display: flex;
       align-items: center;
+      gap: 16px;
     }
     .isms-logo-wrap img {
       height: 80px;
       width: auto;
       object-fit: contain;
+    }
+    .isms-licence {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-mid);
+      white-space: nowrap;
     }
     .about-right img { width: 100%; display: block; }
 
@@ -132,7 +182,7 @@
     .ai-card:hover { background: rgba(255,255,255,0.1); border-color: rgba(0,200,120,0.4); }
     .ai-card-title { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
     .ai-card-title .tag { font-size: 0.7rem; background: rgba(255,255,255,0.15); color: #f0ffd6; padding: 3px 10px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.3); }
-    .ai-card p { font-size: 0.9rem; color: rgba(255,255,255,0.65); line-height: 1.7; font-weight: 300; }
+    .ai-card p { font-size: 0.95rem; color: rgba(255,255,255,0.9); line-height: 1.8; font-weight: 400; }
     .ai-image { border-radius: var(--radius); overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
 
     /* IMPACT */
@@ -164,6 +214,9 @@
     #sharing { background: var(--bg-base); }
     .sharing-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 64px; align-items: center; }
     .sharing-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 0; }
+    @media (max-width: 700px) {
+      .sharing-cards { grid-template-columns: 1fr; }
+    }
     .info-card-with-image {
       background: var(--bg-white);
       border: 1px solid var(--border);
@@ -223,19 +276,19 @@
     .statsai-image { border-radius: var(--radius); overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
     #stats-ai .section-title { color: #fff; }
     #stats-ai .section-label { background: rgba(255,255,255,0.12); color: #fff; }
-    .stats-body { font-size: 1rem; color: rgba(255,255,255,0.75); font-weight: 300; line-height: 1.85; margin-top: 20px; }
+    .stats-body { font-size: 1.05rem; color: rgba(255,255,255,0.95); font-weight: 400; line-height: 1.85; margin-top: 20px; }
     .stats-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 10px 20px; border-radius: 50px; font-size: 0.85rem; font-weight: 600; margin-top: 24px; }
 
     /* FAQ */
     #faq { background: var(--bg-base); }
     .faq-list { max-width: 780px; margin: 48px auto 0; display: grid; gap: 12px; }
     .faq-item { background: var(--bg-white); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
-    .faq-question { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; background: none; border: none; cursor: pointer; text-align: left; font-family: var(--font-body); font-size: 1rem; font-weight: 600; color: var(--text-dark); gap: 16px; transition: background 0.2s; }
+    .faq-question { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 22px 24px; background: none; border: none; cursor: pointer; text-align: left; font-family: var(--font-body); font-size: 1.05rem; font-weight: 700; color: var(--text-dark); gap: 16px; transition: background 0.2s; }
     .faq-question:hover { background: var(--green-pale); }
     .faq-icon { flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%; background: var(--green-pale); display: grid; place-items: center; color: var(--green-primary); font-size: 1rem; transition: transform 0.3s, background 0.2s; font-weight: 400; }
     .faq-item.open .faq-icon { transform: rotate(45deg); background: var(--green-primary); color: #fff; }
     .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
-    .faq-answer-inner { padding: 0 24px 20px; font-size: 0.92rem; color: var(--text-soft); line-height: 1.8; font-weight: 300; }
+    .faq-answer-inner { padding: 4px 24px 24px; font-size: 1rem; color: var(--text-mid); line-height: 1.9; font-weight: 400; }
     .faq-item.open .faq-answer { max-height: 300px; }
 
     /* TRIAL */
@@ -298,7 +351,6 @@
       .about-title { white-space: normal; font-size: clamp(1.3rem, 4vw, 1.8rem); }
       .section { padding: 72px 20px; }
       nav { padding: 0 16px; }
-      .nav-links { display: none; }
     }
     @media (max-width: 600px) {
       .hero-cta-group { flex-direction: column; align-items: center; }
@@ -312,13 +364,16 @@
   <header id="site-header">
     <nav>
       <a href="#" class="nav-logo"><img src="ロゴ_字あり.png" alt="Mintimeロゴ"></a>
-      <ul class="nav-links">
+      <ul class="nav-links" id="nav-links">
         <li><a href="#about">電子カルテ</a></li>
         <li><a href="#generative-ai">生成AI</a></li>
         <li><a href="#stats-ai">統計AI</a></li>
         <li><a href="#faq">FAQ</a></li>
         <li><a href="company.html" target="_blank">会社情報</a></li>
       </ul>
+      <button class="hamburger" id="hamburger" aria-label="メニュー">
+        <span></span><span></span><span></span>
+      </button>
       <a href="#trial" class="nav-cta">▶ 無料トライアル</a>
     </nav>
   </header>
@@ -363,6 +418,7 @@
             </div>
             <div class="isms-logo-wrap">
               <img src="ISMS_JASANZ_ロゴ.jpg" alt="ISMS ISO27001 認証ロゴ">
+              <span class="isms-licence">Licence No. ISMS/0393</span>
             </div>
           </div>
           <div class="about-right">
@@ -377,8 +433,8 @@
       <div class="section-inner">
         <div class="reveal">
           <span class="section-label" style="background:rgba(255,255,255,0.15); color:#fff;">Generative AI</span>
-          <h2 class="about-title" style="color:#fff; margin-top: 8px;">生成AIで業務を効率化</h2>
-          <p style="font-size:1.35rem; font-weight: 600; color:#fff; line-height: 1.7; margin-bottom: 0;">計画書・記録書・報告書を自動作成。職員の記録負担を大幅に削減します。</p>
+          <h2 class="about-title" style="color:#fff; margin-top: 8px;">生成AIで職員の業務を大幅に効率化</h2>
+          <p style="font-size:1.35rem; font-weight: 600; color:#fff; line-height: 1.7; margin-bottom: 0;">記録書・報告書を自動作成。職員の記録負担を大幅に削減します。</p>
         </div>
         <div class="ai-grid">
           <div class="ai-cards reveal">
@@ -398,7 +454,7 @@
 
         <!-- IMPACT：同セクション内に配置 -->
         <div class="impact-inner-ai">
-          <h3 class="impact-title-ai">訪問回数の増加で職員1人あたりの月間報酬が増加します</h3>
+          <h3 class="impact-title-ai">訪問回数の増加で<br>職員1人あたりの月間報酬が増加します</h3>
           <img src="導入効果.png" alt="導入効果グラフ">
         </div>
       </div>
@@ -408,16 +464,12 @@
     <section id="sharing" class="section">
       <div class="section-inner">
         <span class="section-label">Information Sharing</span>
-        <h2 class="about-title">情報共有機能で営業力が向上</h2>
+        <h2 class="about-title">医師・ケアマネージャーとの連携機能で営業力向上</h2>
 
-        <!-- 上段：左テキスト ／ 右に画像 -->
-        <div class="about-body-grid" style="margin-bottom: 48px; grid-template-columns: 1fr 1.2fr; align-items: center;">
-          <div class="about-left">
-            <p style="font-size: 1.35rem; font-weight: 600; color: var(--text-dark); line-height: 1.7; max-width: 320px;">利用者の体調と事業所の空き状況を医師・ケアマネージャーとリアルタイム共有。</p>
-          </div>
-          <div class="about-right" style="transform: none;">
-            <img src="1.jpg" alt="情報共有機能イメージ" style="border-radius: var(--radius); box-shadow: var(--shadow-md); max-height: 288px; object-fit: cover; width: 100%;">
-          </div>
+        <!-- 上段：テキスト上部・画像中央 -->
+        <div style="margin-bottom: 48px; text-align: center;">
+          <p style="font-size: 1.35rem; font-weight: 600; color: var(--text-dark); line-height: 1.7; width: 100%; margin-bottom: 24px;">指示書・記録書・報告書に加え、事業所の空き状況を共有しより依頼しやすい環境を構築します。</p>
+          <img src="1.jpg" alt="情報共有機能イメージ" style="border-radius: var(--radius); box-shadow: var(--shadow-md); max-height: 288px; object-fit: cover; display: block; margin: 0 auto; max-width: 600px; width: 100%;">
         </div>
 
         <!-- 下段：大きなカード2枚 -->
@@ -535,4 +587,31 @@
 
   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     const header = document.getElementById('site-header');
-    window.addEventListener('scr
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 10);
+    });
+
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        navLinks.classList.remove('open');
+      });
+    });
+
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+  </script>
+</body>
+</html>
