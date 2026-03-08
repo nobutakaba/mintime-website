@@ -215,7 +215,7 @@
       <button class="hamburger" id="hamburger" aria-label="メニュー">
         <span></span><span></span><span></span>
       </button>
-      <a href="#trial" class="nav-cta">▶ 無料トライアル</a>
+      <a href="#trial" class="nav-cta" style="white-space: nowrap;">▶ 無料トライアル</a>
     </nav>
   </header>
 
@@ -272,7 +272,7 @@
         <div class="reveal">
           <span class="section-label" style="background:rgba(255,255,255,0.15); color:#fff;">Generative AI</span>
           <h2 class="about-title" style="color:#fff; margin-top: 8px;">生成AIで職員の業務を大幅に効率化</h2>
-          <p style="font-size:1.35rem; font-weight: 600; color:#fff; line-height: 1.7; margin-bottom: 0;">記録書・報告書を自動作成。職員の記録負担を大幅に削減します。</p>
+          <p style="font-size: clamp(1rem, 2.5vw, 1.35rem); font-weight: 600; color:#fff; line-height: 1.7; margin-bottom: 0;">記録書・報告書を自動作成。職員の記録負担を大幅に削減します。</p>
         </div>
         <div class="ai-grid">
           <div class="ai-cards reveal">
@@ -302,7 +302,7 @@
         <span class="section-label">Information Sharing</span>
         <h2 class="about-title">医師・ケアマネージャーとの連携機能で営業力向上</h2>
         <div style="margin-bottom: 48px;">
-          <p style="font-size: 1.35rem; font-weight: 600; color: var(--text-dark); line-height: 1.7; margin-bottom: 24px;">記録をアプリから確認でき、事業所の空き状況も一目で分かります。</p>
+          <p style="font-size: clamp(1rem, 2.5vw, 1.35rem); font-weight: 600; color: var(--text-dark); line-height: 1.7; margin-bottom: 24px;">記録をアプリから確認でき、事業所の空き状況も一目で分かります。</p>
           <img src="1.jpg" alt="情報共有機能イメージ" style="border-radius: var(--radius); box-shadow: var(--shadow-md); max-height: 288px; object-fit: cover; display: block; margin: 0 auto; max-width: 600px; width: 100%;">
         </div>
         <div class="sharing-cards">
@@ -389,9 +389,9 @@
         </div>
         <div class="contact-card reveal">
           <p class="contact-label">お問い合わせ</p>
-          <a href="mailto:info@mintime.co.jp" class="contact-email">
+          <a href="/cdn-cgi/l/email-protection#b9d0d7dfd6f9d4d0d7cdd0d4dc97dad697d3c9" class="contact-email">
             <span class="contact-email-icon">✉️</span>
-            info@mintime.co.jp
+            <span class="__cf_email__" data-cfemail="620b0c040d220f0b0c160b0f074c010d4c0812">[email&#160;protected]</span>
           </a>
         </div>
       </div>
@@ -413,7 +413,7 @@
     </div>
   </footer>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     const header = document.getElementById('site-header');
     window.addEventListener('scroll', () => {
       header.classList.toggle('scrolled', window.scrollY > 10);
@@ -433,11 +433,3 @@
     document.querySelectorAll('.faq-question').forEach(btn => {
       btn.addEventListener('click', () => {
         const item = btn.closest('.faq-item');
-        const isOpen = item.classList.contains('open');
-        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-        if (!isOpen) item.classList.add('open');
-      });
-    });
-  </script>
-</body>
-</html>
