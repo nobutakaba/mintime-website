@@ -77,9 +77,31 @@
     .company-section { max-width: 900px; margin: 64px auto; padding: 0 24px 80px; }
     .company-image { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-lg); }
     .company-image img { width: 100%; display: block; }
+
+    /* ── Language switcher ── */
+    .lang-switcher { display: inline-flex; align-items: center; background: var(--green-pale); border: 1px solid var(--border); border-radius: 50px; padding: 3px; gap: 2px; margin-right: 8px; }
+    .lang-btn { padding: 5px 13px; border-radius: 50px; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.05em; cursor: pointer; border: none; background: transparent; color: var(--text-soft, #6b7280); transition: background 0.2s, color 0.2s; font-family: var(--font-display); }
+    .lang-btn.active { background: var(--green-primary); color: #fff; }
+    .lang-btn:hover:not(.active) { background: var(--border); color: var(--text-dark); }
+
+    /* hide/show by language */
+    .lang-en .ja { display: none !important; }
+    .lang-ja .en { display: none !important; }
+    /* ensure img tags with .en/.ja switch correctly */
+    .lang-en img.en { display: block !important; }
+    .lang-ja img.ja { display: block !important; }
   </style>
 </head>
-<body>
+<script>
+  function setLang(lang) {
+    document.getElementById('body').className = 'lang-' + lang;
+    document.getElementById('btn-ja').classList.toggle('active', lang === 'ja');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.documentElement.lang = lang === 'ja' ? 'ja' : 'en';
+    try { localStorage.setItem('mintime-lang', lang); } catch(e) {}
+  }
+</script>
+<body class="lang-ja" id="body">
 
   <header>
     <nav>
@@ -88,28 +110,45 @@
       <label for="nav-toggle" class="hamburger" aria-label="メニュー">
         <span></span><span></span><span></span>
       </label>
+      <div style="display:flex;align-items:center;gap:8px;order:2;margin-left:auto;">
+        <div class="lang-switcher">
+          <button class="lang-btn active" id="btn-ja" onclick="event.stopPropagation();setLang('ja')">JP</button>
+          <button class="lang-btn" id="btn-en" onclick="event.stopPropagation();setLang('en')">EN</button>
+        </div>
+        <a href="index.html#trial" class="nav-cta" style="white-space: nowrap;">▶ <span class="ja">無料トライアル</span><span class="en">Free Trial</span></a>
+      </div>
       <ul class="nav-links" id="nav-links">
-        <li><a href="index.html#about">電子カルテ</a></li>
-        <li><a href="index.html#generative-ai">生成AI</a></li>
-        <li><a href="index.html#stats-ai">統計AI</a></li>
+        <li><a href="index.html#about"><span class="ja">電子カルテ</span><span class="en">EMR</span></a></li>
+        <li><a href="index.html#generative-ai"><span class="ja">生成AI</span><span class="en">Gen AI</span></a></li>
+        <li><a href="index.html#stats-ai"><span class="ja">統計AI</span><span class="en">Stats AI</span></a></li>
         <li><a href="index.html#faq">FAQ</a></li>
-        <li><a href="company.html" class="active">会社情報</a></li>
+        <li><a href="company.html" class="active"><span class="ja">会社情報</span><span class="en">About Us</span></a></li>
       </ul>
-      <a href="index.html#trial" class="nav-cta" style="white-space: nowrap;">▶ 無料トライアル</a>
     </nav>
   </header>
 
   <div class="page-header">
-    <h1>会社情報</h1>
+    <h1><span class="ja">会社情報</span><span class="en">About Us</span></h1>
   </div>
 
   <div class="company-section">
     <div class="company-image">
-      <img src="会社情報.png" alt="会社情報">
+      <img class="ja" src="会社情報.png" alt="会社情報">
+      <img class="en" src="company-en.png" alt="Company Info">
     </div>
   </div>
 
   <script>
+    function setLang(lang) {
+      document.getElementById('body').className = 'lang-' + lang;
+      document.getElementById('btn-ja').classList.toggle('active', lang === 'ja');
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.documentElement.lang = lang === 'ja' ? 'ja' : 'en';
+      try { localStorage.setItem('mintime-lang', lang); } catch(e) {}
+    }
+    // Restore saved preference
+    try { const s = localStorage.getItem('mintime-lang'); if (s && s !== 'ja') setLang(s); } catch(e) {}
+
     // スクロール時ヘッダーに影をつける
     const header = document.querySelector('header');
     window.addEventListener('scroll', () => {
