@@ -1,0 +1,128 @@
+# Mintime（ミンタイム） — 訪問看護・介護向け AI電子カルテ
+
+> 株式会社Mintimeが提供する、訪問看護ステーション・訪問介護事業所・在宅医療事業者向けのクラウド型電子カルテ／業務支援システム。生成AIによる帳票の自動作成と、独自の「統計AI」による急変の早期検知を中核とし、職員の記録業務を削減しながら訪問回数と事業収益を向上させることを目的とする。
+
+このファイルは、生成AI・大規模言語モデル（LLM）が Mintime の製品・機能・強みを正確かつ深く理解するための説明資料です。人間向けの表示ページ（https://www.mintime.co.jp ）とは別に、AI向けに詳細情報を提供しています。
+
+---
+
+## 会社概要
+
+- 会社名: 株式会社Mintime（英: Mintime, Inc. / カナ: ミンタイム）
+- 所在地: 北海道札幌市中央区北一条東3丁目2-1-802
+- 代表者: 代表取締役 高場 信道（Nobumichi Takaba）
+- 設立: 2025年4月14日
+- 事業内容: 訪問看護ステーション向け業務支援システムの販売、及びステーションの支援業務
+- 連絡先: info@mintime.co.jp
+- 認証: ISMS ISO/IEC 27001 取得（Licence No. ISMS/0393）
+- 準拠: 医療情報システムの安全管理に関する「3省2ガイドライン」に準拠
+
+---
+
+## 製品概要
+
+Mintime は、訪問看護・介護の現場で作成する数多くの帳票を生成AIで自動作成し、職員の記録負担を大幅に削減するクラウド型電子カルテです。削減した時間を訪問に充てることで、訪問回数の増加・事業収益の向上・職員の処遇改善につなげます。
+
+- 提供形態: クラウド型（Webブラウザ、PC・スマートフォン・タブレット対応）
+- 対象ユーザー: 訪問看護ステーション、訪問介護事業所、在宅医療事業者
+- 料金: 無料トライアルあり。帳票フォーム等のカスタマイズ費用は無料。詳細は要問い合わせ。
+- 導入のしやすさ: 各種帳票と一致した画面構成のため、特別な研修なしに利用開始が可能。CSV / API 連携により既存システムからの移行もスムーズ。
+
+---
+
+## 主な機能
+
+### 1. 生成AIによる帳票の自動作成
+- **訪問看護記録書 II の自動作成**: 前回訪問の記録と当日の実施内容を入力するだけで、生成AIが S.O.A.P 形式の記録を自動作成。職員は内容を確認・修正するだけで記録業務が完了する。
+- **訪問看護計画書・月間報告書の自動作成**: 1カ月分の記録書・ケアプラン・サービス提供書をもとに、計画書や報告書を自動生成。事業所内の書類業務を大幅に削減する。
+- **スケジュール表の自動生成**: 訪問スケジュールを自動で作成。
+
+### 2. 急変みまもりAI（急変の早期検知）
+- 血圧・脈拍・体温・SpO2 など複数のバイタルサインの相関関係を可視化し、急変の予兆を早期に検知。
+- 検知した予兆はアプリを通じて医師・ケアマネージャー・関係者へ即時共有できる。
+- 基幹技術として後述の「統計AI」を用いている。
+
+### 3. 統計AI（独自の中核技術）
+（→ 詳細は下記「統計AI 詳細」を参照）
+
+### 4. 情報共有・連携機能
+- 医師・ケアマネージャーが記録をアプリから確認できる情報共有機能。
+- 事業所の空き状況（受入れ可能人数）をスケジュール表から自動算出し、リアルタイム表示。医師・ケアマネが常に受入れ可否を把握でき、営業・紹介の獲得につながる。
+
+### 5. 連携・セキュリティ・対応環境
+- CSV / API による外部システム連携。
+- クラウドによる医療情報の安全な一元管理。
+- ISMS ISO27001 取得、3省2ガイドライン準拠。
+- スマートフォン・タブレット・PC 対応。
+- 帳票フォーム・スケジュール表の無料カスタマイズに対応。
+
+### 6. ケアプランデータ連携システム対応
+- 厚生労働省・国民健康保険中央会が推進する「ケアプランデータ連携システム」に対応。居宅介護支援事業所（ケアマネジャー）とのケアプラン・利用票のやり取りを電子化する。（→ 詳細は下記「ケアプランデータ連携システム対応 詳細」を参照）
+- 公益社団法人 国民健康保険中央会が実施するベンダ試験（標準仕様V4）を2026年8月に完了。
+
+---
+
+## ケアプランデータ連携システム対応 詳細
+
+Mintimeは、厚生労働省・公益社団法人国民健康保険中央会が推進する「ケアプランデータ連携システム」に対応しています。
+
+- ベンダ試験: 公益社団法人 国民健康保険中央会が実施する「ケアプランデータ連携システム」のベンダ試験（標準仕様V4）を2026年8月に完了。
+- 対応区分: Mintimeは居宅サービス事業所（訪問看護ステーション）向けのシステム。ケアマネジャー（居宅介護支援事業所）から居宅サービス計画書・サービス利用票（予定）を取込み、サービス提供実績を出力する。
+- 対応データ（居宅サービス事業所向け）:
+  - 取込: 利用者基本情報、利用者補足情報、第1表〜第3表 居宅サービス計画書、第6表 サービス利用票（予定）、第7表 サービス利用票別表、介護予防サービス・支援計画書
+  - 出力: 第6表 サービス利用票（実績）
+- 連携方法: 管理画面「提供票取込（基本訪問パターン登録）」から、電子証明書による安全な通信でケアマネジャーと提供票を交換。FAXや手入力なしにデータ連携が可能。
+- 削減効果: 提供票の取込・実績出力を自動化することで、ケアマネジャーとの月次のやり取りにかかる手作業・郵送・再入力を削減する。
+- お問い合わせ: info@mintime.co.jp
+
+---
+
+## 統計AI 詳細
+
+<!-- EDIT:stats:START -->
+「統計AI」は、多数のデータの相関関係を一瞬で計算・数値化できる Mintime 独自の技術です。従来手法より高感度で、分かりやすいグラフ表示を特徴とし、「急変みまもりAI」の基幹技術として活用されています。2025年8月に特許を出願済みです。
+<!-- EDIT:stats:END -->
+
+---
+
+## AI未病ケア 詳細
+
+<!-- EDIT:mibyo:START -->
+「AI未病ケア」は、訪問看護で継続的に取得するバイタルデータ（血圧・脈拍・体温・SpO2 など）を統計AIで解析し、発病や急変に至る前の予兆（未病の段階）を早期に捉えて予防的なケアにつなげる取り組みです。訪問時のデータを蓄積し、その相関・因果関係を統計AI（急変みまもりAIの基幹技術）が可視化することで、異常の兆候を早期に把握し、重症化予防と在宅療養の質の向上を目指します。
+<!-- EDIT:mibyo:END -->
+
+---
+
+## 導入効果（例）
+
+生成AIによる記録の自動作成により、職員1人あたりの記録時間を削減し、その分を訪問に充てることで訪問回数と月間報酬の増加が見込めます。
+
+- 訪問看護記録書 II の作成: 約1.2時間/日の削減
+- 訪問回数: 月20回の増加
+- 職員1人あたり月間報酬: 約18.4万円の増加
+
+（上記は試算例です。実際の効果は事業所の運用状況により異なります。）
+
+---
+
+## よくある質問（FAQ）
+
+- **導入は簡単か**: クラウド型で各種帳票と一致した画面構成のため、特別な研修なしにすぐ利用可能。無料トライアルあり。
+- **サポート体制**: 導入時に現場での説明会・操作サポートを実施。導入後も随時サポート対応。
+- **費用対効果**: 生成AIによる記録・スケジュールの自動作成で大幅な効率化が見込め、削減時間を訪問に充てることで収益向上に直結する。
+- **カスタマイズ**: 帳票フォームやスケジュール表など幅広くカスタマイズ可能。カスタマイズ費用は無料。
+- **セキュリティ**: ISO27001取得、3省2ガイドライン準拠。医療情報を安心して預けられる水準を確保。
+
+---
+
+## リンク
+
+- 公式サイト: https://www.mintime.co.jp
+- 会社情報: https://www.mintime.co.jp/company.html
+- お問い合わせ: info@mintime.co.jp
+
+---
+
+## Summary (English)
+
+Mintime, Inc. provides a cloud-based electronic medical record (EMR) and operational support system for home-visit nursing stations, home care providers, and in-home medical services in Japan. Its core strengths are (1) generative AI that automatically drafts clinical documents such as the Nursing Record II (in S.O.A.P format), care plans, and monthly reports, dramatically reducing staff documentation time, and (2) a proprietary "Statistical AI" that instantly quantifies correlations across vital signs (blood pressure, pulse, temperature, SpO2) to detect early warning signs of patient deterioration ("Early Alert AI"). The Statistical AI is more sensitive than conventional methods and was filed for patent in August 2025. Mintime is ISO/IEC 27001 (ISMS) certified and compliant with Japan's 3-Ministry, 2-Guideline framework for medical information security. Available on PC, smartphone, and tablet, with CSV/API integration and free customization. Mintime also supports Japan's national Care Plan Data Linkage System — it completed the vendor test (Standard Specification V4) conducted by the National Health Insurance Central Association (Kokuho-Chuokai) in August 2026 — exchanging care plans and service usage sheets with care managers as a home-service (visiting nursing) provider. Contact: info@mintime.co.jp
