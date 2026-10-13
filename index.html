@@ -492,7 +492,7 @@
         <div class="ai-flowcard reveal">
           <h3>生成AIを使ったシステム構成</h3>
           <p class="fc-sub">ケアマネージャー・主治医から受け取った情報をもとに、<b style="color:#1a7a5e">訪問看護（Mintime）</b>の<b style="color:#ef4444">生成AI</b>が各帳票を自動で作成します。</p>
-          <svg viewBox="0 0 1200 492" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="左から右へ流れる生成AIシステム構成図。主治医・ケアマネの情報を訪問看護Mintimeの生成AIが受け取り各帳票を自動作成し、下を通って左へフィードバックする">
+          <svg viewBox="0 0 1180 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="左から右へ流れる生成AIシステム構成図。主治医・ケアマネの情報を訪問看護Mintimeが受け取り、生成AIが各帳票を自動作成し、下を通って左へフィードバックする">
             <defs>
               <marker id="agy" markerWidth="8.5" markerHeight="8.5" refX="6.5" refY="4.25" orient="auto"><path d="M0,0 L8.5,4.25 L0,8.5 Z" fill="#94a3b8"/></marker>
               <marker id="ard" markerWidth="8.5" markerHeight="8.5" refX="6.5" refY="4.25" orient="auto"><path d="M0,0 L8.5,4.25 L0,8.5 Z" fill="#ef4444"/></marker>
@@ -501,72 +501,72 @@
             </defs>
 
             <!-- zone panels -->
-            <rect x="16"  y="32"  width="268" height="108" rx="16" fill="#f6edfb" stroke="#e4cdf3"/>
-            <rect x="16"  y="172" width="268" height="236" rx="16" fill="#eaf3fb" stroke="#c7ddf5"/>
-            <rect x="314" y="32"  width="300" height="376" rx="16" fill="#e9f8f1" stroke="#bfe9d6"/>
-            <rect x="644" y="32"  width="540" height="376" rx="16" fill="#f0faf5" stroke="#cdeede"/>
-            <g font-family="sans-serif" font-size="14" font-weight="800" text-anchor="middle">
-              <text x="150" y="24"  fill="#9333ea">主治医</text>
-              <text x="150" y="164" fill="#2563eb">ケアマネージャー</text>
-              <text x="464" y="24"  fill="#1a7a5e">訪問看護（Mintime）</text>
-              <text x="914" y="24"  fill="#1a7a5e">生成AIが自動作成する帳票</text>
+            <rect x="16"  y="32"  width="268" height="104" rx="16" fill="#f6edfb" stroke="#e4cdf3"/>
+            <rect x="16"  y="168" width="268" height="232" rx="16" fill="#eaf3fb" stroke="#c7ddf5"/>
+            <rect x="314" y="32"  width="850" height="372" rx="16" fill="#e9f8f1" stroke="#bfe9d6"/>
+            <rect x="600" y="58"  width="548" height="320" rx="13" fill="#f7fdfb" stroke="#bfe9d6"/>
+            <g font-family="sans-serif" font-weight="800" text-anchor="middle">
+              <text x="150" y="24"  font-size="14" fill="#9333ea">主治医</text>
+              <text x="150" y="160" font-size="14" fill="#2563eb">ケアマネージャー</text>
+              <text x="430" y="24"  font-size="14" fill="#1a7a5e">訪問看護（Mintime）</text>
+              <text x="874" y="50"  font-size="13" fill="#1a7a5e">生成AIが自動作成する帳票</text>
             </g>
 
             <!-- FEEDBACK (right -> left along the bottom) -->
             <g stroke="#f59e0b" stroke-width="2.3" fill="none" stroke-dasharray="7 5" stroke-linejoin="round">
-              <path d="M914,338 L914,430 L150,430 L150,408" marker-end="url(#aam)"/>
-              <path d="M1156,126 L1172,126 L1172,454 L300,454 L300,94 L284,94" marker-end="url(#aam)"/>
+              <path d="M700,378 L700,424 L150,424 L150,400" marker-end="url(#aam)"/>
+              <path d="M1124,140 L1168,140 L1168,448 L8,448 L8,84 L16,84" marker-end="url(#aam)"/>
             </g>
             <g font-family="sans-serif" font-size="11.5" font-weight="700" fill="#b45309" text-anchor="middle">
-              <text x="470" y="425">記録・実績が次の計画へ</text>
-              <text x="735" y="449">報告書を主治医へ</text>
+              <text x="430" y="419">記録・実績が次の計画へ</text>
+              <text x="640" y="443">報告書を主治医へ</text>
             </g>
 
             <!-- RED: inputs -> 計画書 (comb) -->
             <g stroke="#ef4444" stroke-width="2.4" fill="none" stroke-linejoin="round">
-              <path d="M266,84 L298,84"/>
-              <path d="M266,221 L298,221"/>
-              <path d="M266,275 L298,275"/>
-              <path d="M266,323 L298,323"/>
-              <path d="M298,84 L298,323"/>
-              <path d="M298,188 L360,188" marker-end="url(#ard)"/>
-              <path d="M398,100 L398,160" marker-end="url(#ard)"/>
-              <path d="M540,100 L540,160" marker-end="url(#ard)"/>
+              <path d="M266,82 L288,82"/>
+              <path d="M266,214 L288,214"/>
+              <path d="M266,269 L288,269"/>
+              <path d="M266,319 L288,319"/>
+              <path d="M288,82 L288,319"/>
+              <path d="M288,176 L346,176" marker-end="url(#ard)"/>
+              <path d="M448,110 L448,148" marker-end="url(#ard)"/>
             </g>
             <!-- RED: 計画書 -> documents (tree) -->
             <g stroke="#ef4444" stroke-width="2.4" fill="none" stroke-linejoin="round">
-              <path d="M570,188 L640,188"/>
-              <path d="M640,78 L640,318"/>
-              <path d="M640,78 L672,78" marker-end="url(#ard)"/>
-              <path d="M640,126 L672,126" marker-end="url(#ard)"/>
-              <path d="M640,174 L672,174" marker-end="url(#ard)"/>
-              <path d="M640,222 L672,222" marker-end="url(#ard)"/>
-              <path d="M640,270 L672,270" marker-end="url(#ard)"/>
-              <path d="M640,318 L672,318" marker-end="url(#ard)"/>
+              <path d="M550,176 L588,176"/>
+              <path d="M588,92 L588,332"/>
+              <path d="M588,92 L624,92" marker-end="url(#ard)"/>
+              <path d="M588,140 L624,140" marker-end="url(#ard)"/>
+              <path d="M588,188 L624,188" marker-end="url(#ard)"/>
+              <path d="M588,236 L624,236" marker-end="url(#ard)"/>
+              <path d="M588,284 L624,284" marker-end="url(#ard)"/>
+              <path d="M588,332 L624,332" marker-end="url(#ard)"/>
             </g>
-            <!-- GRAY: 実績->請求 chain -->
+            <!-- GRAY: 計画書->請求 and 利用者情報->請求(up) -->
             <g stroke="#94a3b8" stroke-width="2" fill="none">
-              <path d="M345,100 L345,253 L360,253" marker-end="url(#agy)"/>
-              <path d="M465,272 L465,282" marker-end="url(#agy)"/>
+              <path d="M448,204 L448,244" marker-end="url(#agy)"/>
+              <path d="M448,322 L448,286" marker-end="url(#agy)"/>
             </g>
 
             <!-- NODES -->
             <g font-family="sans-serif" font-size="12.5" font-weight="700" text-anchor="middle">
-              <rect x="34" y="58"  width="232" height="52" rx="10" fill="#ffffff" stroke="#d8b4fe" stroke-width="1.5" filter="url(#fsh)"/><text x="150" y="89"  fill="#6b21a8">訪問看護指示書</text>
-              <rect x="34" y="196" width="232" height="50" rx="10" fill="#ffffff" stroke="#93c5fd" stroke-width="1.5" filter="url(#fsh)"/><text x="150" y="226" fill="#1e3a8a">ケアプラン</text>
-              <rect x="34" y="256" width="232" height="38" rx="9"  fill="#ffffff" stroke="#93c5fd" stroke-width="1.5" filter="url(#fsh)"/><text x="150" y="279" fill="#1e3a8a">サービス提供票</text>
-              <rect x="34" y="304" width="232" height="38" rx="9"  fill="#ffffff" stroke="#93c5fd" stroke-width="1.5" filter="url(#fsh)"/><text x="150" y="327" fill="#1e3a8a" font-size="11.5">ケアプランデータ連携</text>
-              <rect x="332" y="58" width="132" height="42" rx="9" fill="#2dba8a" filter="url(#fsh)"/><text x="398" y="84" fill="#fff" font-size="11">訪問スケジュール</text>
-              <rect x="474" y="58" width="132" height="42" rx="9" fill="#2dba8a" filter="url(#fsh)"/><text x="540" y="84" fill="#fff">利用者情報</text>
-              <rect x="360" y="160" width="210" height="56" rx="11" fill="#2dba8a" stroke="#ef4444" stroke-width="2.6" filter="url(#fsh)"/><text x="465" y="193" fill="#fff" font-size="13.5">訪問看護計画書</text>
-              <rect x="360" y="234" width="210" height="38" rx="9" fill="#2dba8a" filter="url(#fsh)"/><text x="465" y="258" fill="#fff" font-size="12">体制表（実績）</text>
-              <rect x="360" y="282" width="210" height="38" rx="9" fill="#155e75" filter="url(#fsh)"/><text x="465" y="306" fill="#fff" font-size="13">請求</text>
-              <rect x="672" y="58"  width="484" height="40" rx="8" fill="#2dba8a" stroke="#ef4444" stroke-width="2.2" filter="url(#fsh)"/><text x="914" y="83"  fill="#fff">訪問看護記録書Ⅱ</text>
-              <rect x="672" y="106" width="484" height="40" rx="8" fill="#2dba8a" stroke="#ef4444" stroke-width="2.2" filter="url(#fsh)"/><text x="914" y="131" fill="#fff">訪問看護報告書</text>
-              <rect x="672" y="154" width="484" height="40" rx="8" fill="#2dba8a" stroke="#ef4444" stroke-width="2.2" filter="url(#fsh)"/><text x="914" y="179" fill="#fff">訪問看護／リハ手順書</text>
-              <rect x="672" y="202" width="484" height="40" rx="8" fill="#2dba8a" stroke="#ef4444" stroke-width="2.2" filter="url(#fsh)"/><text x="914" y="227" fill="#fff">褥瘡看護計画書</text>
-              <rect x="672" y="250" width="484" height="40" rx="8" fill="#2dba8a" stroke="#ef4444" stroke-width="2.2" filter="url(#fsh)"/><text x="914" y="275" fill="#fff">コミチャート</text>
-              <rect x="672" y="298" width="484" height="40" rx="8" fill="#2dba8a" stroke="#ef4444" stroke-width="2.2" filter="url(#fsh)"/><text x="914" y="323" fill="#fff">モニタリング票</text>
+              <rect x="34" y="56"  width="232" height="52" rx="10" fill="#ffffff" stroke="#d8b4fe" stroke-width="1.5" filter="url(#fsh)"/><text x="150" y="87"  fill="#6b21a8">訪問看護指示書</text>
+              <rect x="34" y="190" width="232" height="48" rx="10" fill="#ffffff" stroke="#93c5fd" stroke-width="1.5" filter="url(#fsh)"/><text x="150" y="219" fill="#1e3a8a">ケアプラン</text>
+              <rect x="34" y="250" width="232" height="38" rx="9"  fill="#ffffff" stroke="#93c5fd" stroke-width="1.5" filter="url(#fsh)"/><text x="150" y="273" fill="#1e3a8a">サービス提供票</text>
+              <rect x="34" y="300" width="232" height="38" rx="9"  fill="#ffffff" stroke="#93c5fd" stroke-width="1.5" filter="url(#fsh)"/><text x="150" y="323" fill="#1e3a8a" font-size="11.5">ケアプランデータ連携</text>
+
+              <rect x="346" y="66"  width="204" height="44" rx="10" fill="#2dba8a" filter="url(#fsh)"/><text x="448" y="93"  fill="#fff">スケジュール</text>
+              <rect x="346" y="148" width="204" height="56" rx="11" fill="#2dba8a" stroke="#ef4444" stroke-width="2.6" filter="url(#fsh)"/><text x="448" y="181" fill="#fff" font-size="13.5">訪問看護計画書</text>
+              <rect x="346" y="244" width="204" height="42" rx="9"  fill="#155e75" filter="url(#fsh)"/><text x="448" y="270" fill="#fff" font-size="13">請求</text>
+              <rect x="346" y="322" width="204" height="44" rx="10" fill="#2dba8a" filter="url(#fsh)"/><text x="448" y="349" fill="#fff">利用者情報</text>
+
+              <rect x="624" y="72"  width="500" height="40" rx="8" fill="#2dba8a" stroke="#ef4444" stroke-width="2.2" filter="url(#fsh)"/><text x="874" y="97"  fill="#fff">訪問看護記録書Ⅱ</text>
+              <rect x="624" y="120" width="500" height="40" rx="8" fill="#2dba8a" stroke="#ef4444" stroke-width="2.2" filter="url(#fsh)"/><text x="874" y="145" fill="#fff">訪問看護報告書</text>
+              <rect x="624" y="168" width="500" height="40" rx="8" fill="#2dba8a" stroke="#ef4444" stroke-width="2.2" filter="url(#fsh)"/><text x="874" y="193" fill="#fff">訪問看護／リハ手順書</text>
+              <rect x="624" y="216" width="500" height="40" rx="8" fill="#2dba8a" stroke="#ef4444" stroke-width="2.2" filter="url(#fsh)"/><text x="874" y="241" fill="#fff">褥瘡看護計画書</text>
+              <rect x="624" y="264" width="500" height="40" rx="8" fill="#2dba8a" stroke="#ef4444" stroke-width="2.2" filter="url(#fsh)"/><text x="874" y="289" fill="#fff">コミチャート</text>
+              <rect x="624" y="312" width="500" height="40" rx="8" fill="#2dba8a" stroke="#ef4444" stroke-width="2.2" filter="url(#fsh)"/><text x="874" y="337" fill="#fff">モニタリング票</text>
             </g>
           </svg>
         </div>
