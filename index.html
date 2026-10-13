@@ -512,7 +512,7 @@
               <text x="914" y="24"  fill="#1a7a5e">生成AIが自動作成する帳票</text>
             </g>
 
-            <!-- FEEDBACK (right -> left along the bottom, amber dashed) -->
+            <!-- FEEDBACK (right -> left along the bottom) -->
             <g stroke="#f59e0b" stroke-width="2.3" fill="none" stroke-dasharray="7 5" stroke-linejoin="round">
               <path d="M914,338 L914,430 L150,430 L150,408" marker-end="url(#aam)"/>
               <path d="M1156,126 L1172,126 L1172,454 L300,454 L300,94 L284,94" marker-end="url(#aam)"/>
@@ -529,13 +529,13 @@
               <path d="M266,275 L298,275"/>
               <path d="M266,323 L298,323"/>
               <path d="M298,84 L298,323"/>
-              <path d="M298,200 L360,200" marker-end="url(#ard)"/>
-              <path d="M398,100 L398,170" marker-end="url(#ard)"/>
-              <path d="M540,100 L540,170" marker-end="url(#ard)"/>
+              <path d="M298,188 L360,188" marker-end="url(#ard)"/>
+              <path d="M398,100 L398,160" marker-end="url(#ard)"/>
+              <path d="M540,100 L540,160" marker-end="url(#ard)"/>
             </g>
             <!-- RED: 計画書 -> documents (tree) -->
             <g stroke="#ef4444" stroke-width="2.4" fill="none" stroke-linejoin="round">
-              <path d="M570,200 L640,200"/>
+              <path d="M570,188 L640,188"/>
               <path d="M640,78 L640,318"/>
               <path d="M640,78 L672,78" marker-end="url(#ard)"/>
               <path d="M640,126 L672,126" marker-end="url(#ard)"/>
@@ -544,9 +544,10 @@
               <path d="M640,270 L672,270" marker-end="url(#ard)"/>
               <path d="M640,318 L672,318" marker-end="url(#ard)"/>
             </g>
-            <!-- GRAY -->
+            <!-- GRAY: 実績->請求 chain -->
             <g stroke="#94a3b8" stroke-width="2" fill="none">
-              <path d="M465,230 L465,246" marker-end="url(#agy)"/>
+              <path d="M345,100 L345,253 L360,253" marker-end="url(#agy)"/>
+              <path d="M465,272 L465,282" marker-end="url(#agy)"/>
             </g>
 
             <!-- NODES -->
@@ -557,8 +558,9 @@
               <rect x="34" y="304" width="232" height="38" rx="9"  fill="#ffffff" stroke="#93c5fd" stroke-width="1.5" filter="url(#fsh)"/><text x="150" y="327" fill="#1e3a8a" font-size="11.5">ケアプランデータ連携</text>
               <rect x="332" y="58" width="132" height="42" rx="9" fill="#2dba8a" filter="url(#fsh)"/><text x="398" y="84" fill="#fff" font-size="11">訪問スケジュール</text>
               <rect x="474" y="58" width="132" height="42" rx="9" fill="#2dba8a" filter="url(#fsh)"/><text x="540" y="84" fill="#fff">利用者情報</text>
-              <rect x="360" y="170" width="210" height="60" rx="11" fill="#2dba8a" stroke="#ef4444" stroke-width="2.6" filter="url(#fsh)"/><text x="465" y="205" fill="#fff" font-size="13.5">訪問看護計画書</text>
-              <rect x="360" y="246" width="210" height="42" rx="9" fill="#155e75" filter="url(#fsh)"/><text x="465" y="272" fill="#fff" font-size="13.5">請求</text>
+              <rect x="360" y="160" width="210" height="56" rx="11" fill="#2dba8a" stroke="#ef4444" stroke-width="2.6" filter="url(#fsh)"/><text x="465" y="193" fill="#fff" font-size="13.5">訪問看護計画書</text>
+              <rect x="360" y="234" width="210" height="38" rx="9" fill="#2dba8a" filter="url(#fsh)"/><text x="465" y="258" fill="#fff" font-size="12">体制表（実績）</text>
+              <rect x="360" y="282" width="210" height="38" rx="9" fill="#155e75" filter="url(#fsh)"/><text x="465" y="306" fill="#fff" font-size="13">請求</text>
               <rect x="672" y="58"  width="484" height="40" rx="8" fill="#2dba8a" stroke="#ef4444" stroke-width="2.2" filter="url(#fsh)"/><text x="914" y="83"  fill="#fff">訪問看護記録書Ⅱ</text>
               <rect x="672" y="106" width="484" height="40" rx="8" fill="#2dba8a" stroke="#ef4444" stroke-width="2.2" filter="url(#fsh)"/><text x="914" y="131" fill="#fff">訪問看護報告書</text>
               <rect x="672" y="154" width="484" height="40" rx="8" fill="#2dba8a" stroke="#ef4444" stroke-width="2.2" filter="url(#fsh)"/><text x="914" y="179" fill="#fff">訪問看護／リハ手順書</text>
