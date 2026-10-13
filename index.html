@@ -37,7 +37,7 @@
     /* HEADER */
     header { position: sticky; top: 0; z-index: 200; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); transition: box-shadow 0.3s; }
     header.scrolled { box-shadow: 0 2px 20px rgba(45,186,138,0.12); }
-    nav { display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 68px; position: relative; flex-wrap: wrap; }
+    nav { display: flex; align-items: center; justify-content: space-between; max-width: 1320px; margin: 0 auto; padding: 0 24px; height: 68px; position: relative; flex-wrap: wrap; }
     .nav-logo img { height: 52px; width: auto; }
     .nav-links { display: flex; align-items: center; gap: 8px; list-style: none; }
     .nav-links a { font-size: 0.9rem; font-weight: 500; color: var(--text-mid); padding: 8px 14px; border-radius: var(--radius-sm); transition: color 0.2s, background 0.2s; }
@@ -105,12 +105,12 @@
     .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
     .btn-secondary { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: #fff; padding: 16px 34px; border-radius: 50px; font-size: 1rem; font-weight: 500; border: 1.5px solid rgba(255,255,255,0.3); transition: background 0.2s, border-color 0.2s; }
     .btn-secondary:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.5); }
-    .hero-image-wrap { position: relative; z-index: 2; width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px 60px; animation: fade-up 0.9s 0.2s ease both; line-height: 0; }
+    .hero-image-wrap { position: relative; z-index: 2; width: 100%; max-width: 1320px; margin: 0 auto; padding: 0 24px 60px; animation: fade-up 0.9s 0.2s ease both; line-height: 0; }
     .hero-image-wrap img { border-radius: var(--radius); box-shadow: 0 24px 80px rgba(0,0,0,0.4); width: 100%; display: block; }
 
     /* SECTIONS */
     .section { padding: 100px 24px; }
-    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-inner { max-width: 1280px; margin: 0 auto; }
     .section-label { display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--green-primary); background: var(--green-pale); padding: 5px 14px; border-radius: 50px; margin-bottom: 16px; }
     .section-title { font-family: var(--font-display); font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 700; line-height: 1.25; letter-spacing: -0.02em; color: var(--text-dark); margin-bottom: 16px; }
     .section-sub { font-size: 1.1rem; color: var(--text-mid); font-weight: 400; max-width: 560px; }
@@ -208,7 +208,7 @@
 
     /* FOOTER */
     footer { background: var(--green-dark); color: rgba(255,255,255,0.8); padding: 60px 24px 32px; }
-    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-inner { max-width: 1280px; margin: 0 auto; }
     .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 48px; }
     .footer-col h4 { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 14px; }
     .footer-col p, .footer-col a { font-size: 0.95rem; color: rgba(255,255,255,0.75); line-height: 1.8; display: block; font-weight: 300; }
@@ -442,6 +442,63 @@
       </div>
     </section>
 
+    <!-- GENERATIVE AI -->
+    <section id="generative-ai" class="section">
+      <div class="section-inner">
+        <div class="reveal">
+          <h2 class="about-title" style="color:#fff; margin-top: 8px;"><span class="ja">生成AIで職員の業務を大幅に効率化</span><span class="en">Dramatically Reduce Staff Workload with Generative AI</span></h2>
+          <p style="font-size: clamp(1rem, 2.5vw, 1.35rem); font-weight: 600; color:#fff; line-height: 1.7; margin-bottom: 0;"><span class="ja">記録書・報告書を自動作成。職員の記録負担を大幅に削減します。</span><span class="en">Auto-generate clinical notes and reports — significantly cutting the documentation burden for your staff.</span></p>
+        </div>
+        <div class="ai-grid">
+          <div class="ai-cards reveal">
+            <div class="ai-card">
+              <div class="ai-card-title"><span class="ja">訪問看護記録書 Ⅱ</span><span class="en">Nursing Record II</span><span class="tag"><span class="ja">自動生成</span><span class="en">Auto-Generate</span></span></div>
+              <p><span class="ja">前回訪問の記録と当日の実施内容を入力するだけで、生成AIがS.O.A.P形式で自動作成。修正するだけで記録業務を大幅に削減できます。</span><span class="en">Enter previous visit notes and today's activities — the AI drafts a complete S.O.A.P record. Just review and submit to dramatically cut documentation time.</span></p>
+            </div>
+            <div class="ai-card">
+              <div class="ai-card-title"><span class="ja">訪問看護計画書 &amp; 報告書</span><span class="en">Nursing Care Plans &amp; Monthly Reports</span><span class="tag"><span class="ja">自動生成</span><span class="en">Auto-Generate</span></span></div>
+              <p><span class="ja">1カ月間の記録書・ケアプラン・サービス提供書から自動生成。事業所内業務を大幅に削減します。</span><span class="en">Auto-generated from a month's records, care plans, and service logs — dramatically reducing back-office paperwork.</span></p>
+            </div>
+          </div>
+          <div class="ai-image reveal">
+            <img src="web10.jpg" alt="生成AIのイメージ">
+          </div>
+        </div>
+        <div class="impact-inner-ai">
+          <h3 class="impact-title-ai"><span class="ja">訪問回数の増加で<br>職員1人あたりの月間報酬が増加します</span><span class="en">More Visits = Higher Monthly Revenue<br>Per Staff Member</span></h3>
+          <img class="ja" src="導入効果.png" alt="導入効果グラフ">
+          <img class="en" src="impact-en.png" alt="Impact chart">
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section" style="background:var(--bg-white);">
+      <div class="section-inner">
+        <h2 class="about-title"><span class="ja">訪問看護・介護向けクラウド型電子カルテ</span><span class="en">Cloud-Based EMR for Home Nursing &amp; Care</span></h2>
+        <div class="about-body-grid">
+          <div class="about-left">
+            <p class="section-sub"><span class="ja">他のシステムとのCSVファイル・API連携に対応。スムーズな導入と業務フローの維持を実現します。</span><span class="en">Supports CSV and API integration with existing systems for seamless onboarding without disrupting your workflows.</span></p>
+            <div class="about-features">
+              <div class="feature-chip"><span class="chip-icon">🔗</span><span class="ja">CSV / API 外部連携対応</span><span class="en">CSV / API Integration</span></div>
+              <div class="feature-chip"><span class="chip-icon">☁️</span><span class="ja">クラウドで安全に一元管理</span><span class="en">Secure Cloud Management</span></div>
+              <div class="feature-chip"><span class="chip-icon">📱</span><span class="ja">スマホ・タブレット・PC対応</span><span class="en">Mobile, Tablet &amp; Desktop</span></div>
+              <div class="feature-chip"><span class="chip-icon">🛡️</span><span class="ja">3省2ガイドラインに準拠</span><span class="en">3-Ministry Guideline Compliant</span></div>
+              <div class="feature-chip"><span class="chip-icon">✅</span>ISMS ISO27001 <span class="ja">取得済み</span><span class="en">Certified</span></div>
+            </div>
+            <div class="isms-logo-wrap">
+              <img src="ISMS_JASANZ_ロゴ.jpg" alt="ISMS ISO27001 認証ロゴ">
+              <span class="isms-licence">Licence No. ISMS/0393</span>
+            </div>
+          </div>
+          <div class="about-right">
+            <img class="ja" src="システム一覧.png" alt="システム一覧">
+            <img class="en" src="system-en.png" alt="System overview">
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- DIFFERENTIATION LOOP -->
     <style>
       #loop{ background: var(--bg-white); }
@@ -601,63 +658,6 @@
             <text x="340" y="212" text-anchor="middle" font-size="24">🙂</text>
             <text x="340" y="240" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="700" font-family="sans-serif">利用者様</text>
           </svg>
-        </div>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section id="about" class="section" style="background:var(--bg-white);">
-      <div class="section-inner">
-        <h2 class="about-title"><span class="ja">訪問看護・介護向けクラウド型電子カルテ</span><span class="en">Cloud-Based EMR for Home Nursing &amp; Care</span></h2>
-        <div class="about-body-grid">
-          <div class="about-left">
-            <p class="section-sub"><span class="ja">他のシステムとのCSVファイル・API連携に対応。スムーズな導入と業務フローの維持を実現します。</span><span class="en">Supports CSV and API integration with existing systems for seamless onboarding without disrupting your workflows.</span></p>
-            <div class="about-features">
-              <div class="feature-chip"><span class="chip-icon">🔗</span><span class="ja">CSV / API 外部連携対応</span><span class="en">CSV / API Integration</span></div>
-              <div class="feature-chip"><span class="chip-icon">☁️</span><span class="ja">クラウドで安全に一元管理</span><span class="en">Secure Cloud Management</span></div>
-              <div class="feature-chip"><span class="chip-icon">📱</span><span class="ja">スマホ・タブレット・PC対応</span><span class="en">Mobile, Tablet &amp; Desktop</span></div>
-              <div class="feature-chip"><span class="chip-icon">🛡️</span><span class="ja">3省2ガイドラインに準拠</span><span class="en">3-Ministry Guideline Compliant</span></div>
-              <div class="feature-chip"><span class="chip-icon">✅</span>ISMS ISO27001 <span class="ja">取得済み</span><span class="en">Certified</span></div>
-            </div>
-            <div class="isms-logo-wrap">
-              <img src="ISMS_JASANZ_ロゴ.jpg" alt="ISMS ISO27001 認証ロゴ">
-              <span class="isms-licence">Licence No. ISMS/0393</span>
-            </div>
-          </div>
-          <div class="about-right">
-            <img class="ja" src="システム一覧.png" alt="システム一覧">
-            <img class="en" src="system-en.png" alt="System overview">
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- GENERATIVE AI -->
-    <section id="generative-ai" class="section">
-      <div class="section-inner">
-        <div class="reveal">
-          <h2 class="about-title" style="color:#fff; margin-top: 8px;"><span class="ja">生成AIで職員の業務を大幅に効率化</span><span class="en">Dramatically Reduce Staff Workload with Generative AI</span></h2>
-          <p style="font-size: clamp(1rem, 2.5vw, 1.35rem); font-weight: 600; color:#fff; line-height: 1.7; margin-bottom: 0;"><span class="ja">記録書・報告書を自動作成。職員の記録負担を大幅に削減します。</span><span class="en">Auto-generate clinical notes and reports — significantly cutting the documentation burden for your staff.</span></p>
-        </div>
-        <div class="ai-grid">
-          <div class="ai-cards reveal">
-            <div class="ai-card">
-              <div class="ai-card-title"><span class="ja">訪問看護記録書 Ⅱ</span><span class="en">Nursing Record II</span><span class="tag"><span class="ja">自動生成</span><span class="en">Auto-Generate</span></span></div>
-              <p><span class="ja">前回訪問の記録と当日の実施内容を入力するだけで、生成AIがS.O.A.P形式で自動作成。修正するだけで記録業務を大幅に削減できます。</span><span class="en">Enter previous visit notes and today's activities — the AI drafts a complete S.O.A.P record. Just review and submit to dramatically cut documentation time.</span></p>
-            </div>
-            <div class="ai-card">
-              <div class="ai-card-title"><span class="ja">訪問看護計画書 &amp; 報告書</span><span class="en">Nursing Care Plans &amp; Monthly Reports</span><span class="tag"><span class="ja">自動生成</span><span class="en">Auto-Generate</span></span></div>
-              <p><span class="ja">1カ月間の記録書・ケアプラン・サービス提供書から自動生成。事業所内業務を大幅に削減します。</span><span class="en">Auto-generated from a month's records, care plans, and service logs — dramatically reducing back-office paperwork.</span></p>
-            </div>
-          </div>
-          <div class="ai-image reveal">
-            <img src="web10.jpg" alt="生成AIのイメージ">
-          </div>
-        </div>
-        <div class="impact-inner-ai">
-          <h3 class="impact-title-ai"><span class="ja">訪問回数の増加で<br>職員1人あたりの月間報酬が増加します</span><span class="en">More Visits = Higher Monthly Revenue<br>Per Staff Member</span></h3>
-          <img class="ja" src="導入効果.png" alt="導入効果グラフ">
-          <img class="en" src="impact-en.png" alt="Impact chart">
         </div>
       </div>
     </section>
