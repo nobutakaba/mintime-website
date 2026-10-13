@@ -444,23 +444,30 @@
 
     <!-- DIFFERENTIATION LOOP -->
     <style>
-      #loop{ background: var(--bg-base); }
-      #loop .rel-wrap{ max-width:700px; margin:8px auto 0; }
+      #loop{ background: linear-gradient(160deg, #1a7a5e 0%, #2aaa84 100%); color:#fff; position:relative; overflow:hidden; }
+      #loop::before{ content:''; position:absolute; inset:0; pointer-events:none; background-image: radial-gradient(circle at 82% 14%, rgba(0,200,120,0.20) 0%, transparent 55%), radial-gradient(circle at 15% 86%, rgba(0,200,120,0.14) 0%, transparent 55%); }
+      #loop .section-inner{ position:relative; z-index:1; }
+      #loop .loop-head{ font-family:var(--font-display); font-size:clamp(1.5rem,3.6vw,2.3rem); font-weight:700; color:#fff; line-height:1.3; margin-bottom:12px; letter-spacing:-0.01em; }
+      #loop .loop-lead{ max-width:640px; margin:0 auto; color:rgba(255,255,255,0.9); font-size:1.02rem; line-height:1.85; }
+      #loop .rel-wrap{ max-width:720px; margin:14px auto 0; }
       #loop .rel-wrap svg{ width:100%; height:auto; display:block; }
-      #loop .rel-caption{ max-width:720px; margin:26px auto 0; text-align:center; font-size:1.02rem; color:var(--text-mid); line-height:1.95; }
-      #loop .rel-caption b{ color:var(--green-dark); font-weight:700; }
+      #loop .loop-outcome{ display:inline-flex; align-items:center; gap:10px; margin-top:16px; background:rgba(255,255,255,0.14); border:1px solid rgba(255,255,255,0.35); border-radius:50px; padding:13px 28px; font-size:1.02rem; font-weight:700; color:#fff; }
+      #loop .loop-outcome b{ color:#f0ffd6; }
+      @media(max-width:600px){ #loop .loop-outcome{ font-size:0.9rem; padding:11px 18px; } }
     </style>
     <section id="loop" class="section">
-      <div class="section-inner">
+      <div class="section-inner" style="text-align:center;">
+        <h2 class="loop-head"><span class="ja">見守りAIが、関係者をひとつにつなぐ</span><span class="en">Watch-over AI brings everyone together</span></h2>
+        <p class="loop-lead"><span class="ja">訪問で記録した"気づき"が、医師・ケアマネ・ご家族へ届く。その共有が信頼を生み、紹介につながります。</span><span class="en">The insights recorded on each visit reach doctors, care managers and families — building trust and bringing referrals.</span></p>
         <div class="rel-wrap">
           <svg viewBox="0 0 760 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="見守りAI（記録・分析データ）を中心に、訪問看護師・主治医・ケアマネジャー・利用者・ご家族が状態を共有する関係図">
             <defs>
-              <linearGradient id="hubg" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#1a7a5e"/><stop offset="1" stop-color="#2aaa84"/>
-              </linearGradient>
+              <filter id="nsh" x="-25%" y="-25%" width="150%" height="160%">
+                <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#0b3b2c" flood-opacity="0.28"/>
+              </filter>
             </defs>
-            <!-- connecting lines (dashed) -->
-            <g stroke="#45d4a2" stroke-width="2" stroke-dasharray="5 5" stroke-linecap="round">
+            <!-- connecting lines (bold, solid) -->
+            <g stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-opacity="0.9">
               <line x1="380" y1="280" x2="380" y2="75"/>
               <line x1="380" y1="280" x2="185" y2="217"/>
               <line x1="380" y1="280" x2="575" y2="217"/>
@@ -468,35 +475,36 @@
               <line x1="380" y1="280" x2="501" y2="446"/>
             </g>
             <!-- hub -->
-            <circle cx="380" cy="280" r="72" fill="url(#hubg)"/>
-            <text x="380" y="276" text-anchor="middle" fill="#ffffff" font-size="19" font-weight="700" font-family="sans-serif">見守りAI</text>
-            <text x="380" y="298" text-anchor="middle" fill="#d9fff0" font-size="11" font-family="sans-serif">記録・分析データ</text>
+            <circle cx="380" cy="280" r="84" fill="none" stroke="#ffffff" stroke-opacity="0.22" stroke-width="10"/>
+            <circle cx="380" cy="280" r="72" fill="#ffffff"/>
+            <text x="380" y="276" text-anchor="middle" fill="#1a7a5e" font-size="20" font-weight="700" font-family="sans-serif">見守りAI</text>
+            <text x="380" y="298" text-anchor="middle" fill="#2dba8a" font-size="11" font-weight="700" font-family="sans-serif">記録・分析データ</text>
             <!-- nodes -->
             <g font-family="sans-serif">
               <!-- 訪問看護師 (top) -->
-              <rect x="294" y="46" width="172" height="58" rx="14" fill="#ffffff" stroke="#c2edd8" stroke-width="1.5"/>
-              <text x="380" y="72" text-anchor="middle" fill="#1a7a5e" font-size="15" font-weight="700">訪問看護師</text>
-              <text x="380" y="90" text-anchor="middle" fill="#6b7280" font-size="11">訪問ごとに記録</text>
+              <rect x="292" y="46" width="176" height="60" rx="16" fill="#ffffff" filter="url(#nsh)"/>
+              <text x="380" y="73" text-anchor="middle" fill="#1a7a5e" font-size="15" font-weight="700">🩺 訪問看護師</text>
+              <text x="380" y="92" text-anchor="middle" fill="#6b7280" font-size="11">訪問ごとに記録</text>
               <!-- 利用者 (left) -->
-              <rect x="99" y="188" width="172" height="58" rx="14" fill="#ffffff" stroke="#c2edd8" stroke-width="1.5"/>
-              <text x="185" y="214" text-anchor="middle" fill="#1a7a5e" font-size="15" font-weight="700">利用者</text>
-              <text x="185" y="232" text-anchor="middle" fill="#6b7280" font-size="11">様子を確認（ログイン可）</text>
+              <rect x="97" y="188" width="176" height="60" rx="16" fill="#ffffff" filter="url(#nsh)"/>
+              <text x="185" y="215" text-anchor="middle" fill="#1a7a5e" font-size="15" font-weight="700">🙂 利用者</text>
+              <text x="185" y="234" text-anchor="middle" fill="#6b7280" font-size="11">様子を確認（ログイン可）</text>
               <!-- 主治医 (right) -->
-              <rect x="489" y="188" width="172" height="58" rx="14" fill="#ffffff" stroke="#c2edd8" stroke-width="1.5"/>
-              <text x="575" y="214" text-anchor="middle" fill="#1a7a5e" font-size="15" font-weight="700">主治医</text>
-              <text x="575" y="232" text-anchor="middle" fill="#6b7280" font-size="11">記録・報告を確認</text>
+              <rect x="487" y="188" width="176" height="60" rx="16" fill="#ffffff" filter="url(#nsh)"/>
+              <text x="575" y="215" text-anchor="middle" fill="#1a7a5e" font-size="15" font-weight="700">🏥 主治医</text>
+              <text x="575" y="234" text-anchor="middle" fill="#6b7280" font-size="11">記録・報告を確認</text>
               <!-- ご家族 (bottom-left) -->
-              <rect x="173" y="417" width="172" height="58" rx="14" fill="#ffffff" stroke="#c2edd8" stroke-width="1.5"/>
-              <text x="259" y="443" text-anchor="middle" fill="#1a7a5e" font-size="15" font-weight="700">ご家族</text>
-              <text x="259" y="461" text-anchor="middle" fill="#6b7280" font-size="11">離れていても見守れる</text>
+              <rect x="171" y="416" width="176" height="60" rx="16" fill="#ffffff" filter="url(#nsh)"/>
+              <text x="259" y="443" text-anchor="middle" fill="#1a7a5e" font-size="15" font-weight="700">👪 ご家族</text>
+              <text x="259" y="462" text-anchor="middle" fill="#6b7280" font-size="11">離れていても見守れる</text>
               <!-- ケアマネジャー (bottom-right) -->
-              <rect x="415" y="417" width="172" height="58" rx="14" fill="#ffffff" stroke="#c2edd8" stroke-width="1.5"/>
-              <text x="501" y="443" text-anchor="middle" fill="#1a7a5e" font-size="15" font-weight="700">ケアマネジャー</text>
-              <text x="501" y="461" text-anchor="middle" fill="#6b7280" font-size="11">モニタリング票を確認</text>
+              <rect x="413" y="416" width="176" height="60" rx="16" fill="#ffffff" filter="url(#nsh)"/>
+              <text x="501" y="443" text-anchor="middle" fill="#1a7a5e" font-size="15" font-weight="700">📋 ケアマネジャー</text>
+              <text x="501" y="462" text-anchor="middle" fill="#6b7280" font-size="11">モニタリング票を確認</text>
             </g>
           </svg>
         </div>
-        <p class="rel-caption"><span class="ja">Mintimeの<b>見守りAI（記録・分析データ）</b>を中心に、<b>訪問看護師・主治医・ケアマネジャー・利用者・ご家族</b>が最新の状態を共有。情報が届くことで信頼が生まれ、<b>紹介</b>と<b>職員の給料アップ</b>につながります。</span><span class="en">With Mintime's Watch-over AI (records &amp; analysis) at the center, visiting nurses, doctors, care managers, patients and families share the latest status. When information reaches everyone, trust grows — leading to more referrals and higher staff pay.</span></p>
+        <div class="loop-outcome"><span class="ja">共有が信頼を生み、<b>紹介</b>が増え、<b>職員の給料アップ</b>へ</span><span class="en">Sharing builds trust, referrals grow, and <b>staff pay rises</b></span></div>
       </div>
     </section>
 
