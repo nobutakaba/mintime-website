@@ -445,7 +445,7 @@
     <!-- DIFFERENTIATION LOOP -->
     <style>
       #loop{ background: var(--bg-base); }
-      #loop .rel-wrap{ max-width:620px; margin:8px auto 0; }
+      #loop .rel-wrap{ max-width:700px; margin:8px auto 0; }
       #loop .rel-wrap svg{ width:100%; height:auto; display:block; }
       #loop .rel-caption{ max-width:720px; margin:26px auto 0; text-align:center; font-size:1.02rem; color:var(--text-mid); line-height:1.95; }
       #loop .rel-caption b{ color:var(--green-dark); font-weight:700; }
@@ -453,45 +453,50 @@
     <section id="loop" class="section">
       <div class="section-inner">
         <div class="rel-wrap">
-          <svg viewBox="0 0 760 450" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mintimeが利用者・ご家族、訪問看護、医師・ケアマネをつなぐ関係図">
+          <svg viewBox="0 0 760 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="見守りAI（記録・分析データ）を中心に、訪問看護師・主治医・ケアマネジャー・利用者・ご家族が状態を共有する関係図">
             <defs>
               <linearGradient id="hubg" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0" stop-color="#1a7a5e"/><stop offset="1" stop-color="#2aaa84"/>
               </linearGradient>
             </defs>
-            <!-- connecting lines -->
-            <g stroke="#45d4a2" stroke-width="2.5" stroke-linecap="round">
-              <line x1="380" y1="159" x2="380" y2="90"/>
-              <line x1="324" y1="260" x2="200" y2="356"/>
-              <line x1="436" y1="260" x2="560" y2="356"/>
+            <!-- connecting lines (dashed) -->
+            <g stroke="#45d4a2" stroke-width="2" stroke-dasharray="5 5" stroke-linecap="round">
+              <line x1="380" y1="280" x2="380" y2="75"/>
+              <line x1="380" y1="280" x2="185" y2="217"/>
+              <line x1="380" y1="280" x2="575" y2="217"/>
+              <line x1="380" y1="280" x2="259" y2="446"/>
+              <line x1="380" y1="280" x2="501" y2="446"/>
             </g>
             <!-- hub -->
-            <circle cx="380" cy="225" r="66" fill="url(#hubg)"/>
-            <text x="380" y="221" text-anchor="middle" fill="#ffffff" font-size="20" font-weight="700" font-family="sans-serif">Mintime</text>
-            <text x="380" y="245" text-anchor="middle" fill="#d9fff0" font-size="13" font-family="sans-serif">見守りAI</text>
+            <circle cx="380" cy="280" r="72" fill="url(#hubg)"/>
+            <text x="380" y="276" text-anchor="middle" fill="#ffffff" font-size="19" font-weight="700" font-family="sans-serif">見守りAI</text>
+            <text x="380" y="298" text-anchor="middle" fill="#d9fff0" font-size="11" font-family="sans-serif">記録・分析データ</text>
             <!-- nodes -->
             <g font-family="sans-serif">
-              <rect x="276" y="14" width="208" height="72" rx="16" fill="#ffffff" stroke="#c2edd8" stroke-width="1.5"/>
-              <text x="380" y="57" text-anchor="middle" fill="#1a7a5e" font-size="17" font-weight="700">利用者・ご家族</text>
-              <rect x="16" y="352" width="208" height="72" rx="16" fill="#ffffff" stroke="#c2edd8" stroke-width="1.5"/>
-              <text x="120" y="388" text-anchor="middle" fill="#1a7a5e" font-size="17" font-weight="700">訪問看護</text>
-              <text x="120" y="408" text-anchor="middle" fill="#6b7280" font-size="11.5">ステーション・職員</text>
-              <rect x="536" y="352" width="208" height="72" rx="16" fill="#ffffff" stroke="#c2edd8" stroke-width="1.5"/>
-              <text x="640" y="388" text-anchor="middle" fill="#1a7a5e" font-size="17" font-weight="700">医師・ケアマネ</text>
-              <text x="640" y="408" text-anchor="middle" fill="#6b7280" font-size="11.5">依頼者</text>
-            </g>
-            <!-- line labels -->
-            <g font-family="sans-serif" font-size="13" font-weight="700" fill="#1a7a5e">
-              <rect x="330" y="112" width="100" height="25" rx="12.5" fill="#eafaf3"/>
-              <text x="380" y="129" text-anchor="middle">見守り・ケア</text>
-              <rect x="218" y="296" width="88" height="25" rx="12.5" fill="#eafaf3"/>
-              <text x="262" y="313" text-anchor="middle">記録・共有</text>
-              <rect x="454" y="296" width="88" height="25" rx="12.5" fill="#eafaf3"/>
-              <text x="498" y="313" text-anchor="middle">連携・紹介</text>
+              <!-- 訪問看護師 (top) -->
+              <rect x="294" y="46" width="172" height="58" rx="14" fill="#ffffff" stroke="#c2edd8" stroke-width="1.5"/>
+              <text x="380" y="72" text-anchor="middle" fill="#1a7a5e" font-size="15" font-weight="700">訪問看護師</text>
+              <text x="380" y="90" text-anchor="middle" fill="#6b7280" font-size="11">訪問ごとに記録</text>
+              <!-- 利用者 (left) -->
+              <rect x="99" y="188" width="172" height="58" rx="14" fill="#ffffff" stroke="#c2edd8" stroke-width="1.5"/>
+              <text x="185" y="214" text-anchor="middle" fill="#1a7a5e" font-size="15" font-weight="700">利用者</text>
+              <text x="185" y="232" text-anchor="middle" fill="#6b7280" font-size="11">様子を確認（ログイン可）</text>
+              <!-- 主治医 (right) -->
+              <rect x="489" y="188" width="172" height="58" rx="14" fill="#ffffff" stroke="#c2edd8" stroke-width="1.5"/>
+              <text x="575" y="214" text-anchor="middle" fill="#1a7a5e" font-size="15" font-weight="700">主治医</text>
+              <text x="575" y="232" text-anchor="middle" fill="#6b7280" font-size="11">記録・報告を確認</text>
+              <!-- ご家族 (bottom-left) -->
+              <rect x="173" y="417" width="172" height="58" rx="14" fill="#ffffff" stroke="#c2edd8" stroke-width="1.5"/>
+              <text x="259" y="443" text-anchor="middle" fill="#1a7a5e" font-size="15" font-weight="700">ご家族</text>
+              <text x="259" y="461" text-anchor="middle" fill="#6b7280" font-size="11">離れていても見守れる</text>
+              <!-- ケアマネジャー (bottom-right) -->
+              <rect x="415" y="417" width="172" height="58" rx="14" fill="#ffffff" stroke="#c2edd8" stroke-width="1.5"/>
+              <text x="501" y="443" text-anchor="middle" fill="#1a7a5e" font-size="15" font-weight="700">ケアマネジャー</text>
+              <text x="501" y="461" text-anchor="middle" fill="#6b7280" font-size="11">モニタリング票を確認</text>
             </g>
           </svg>
         </div>
-        <p class="rel-caption"><span class="ja">Mintimeは、<b>利用者・ご家族</b>／<b>訪問看護</b>／<b>医師・ケアマネ</b>の3者をつなぎます。見守りAIが捉えた<b>バイタルの変化を共有</b>することで信頼が生まれ、<b>紹介</b>と<b>職員の給料アップ</b>につながります。</span><span class="en">Mintime connects patients and families, visiting nurses, and doctors and care managers. Sharing the vital-sign changes its Watch-over AI captures builds trust — leading to more referrals and higher staff pay.</span></p>
+        <p class="rel-caption"><span class="ja">Mintimeの<b>見守りAI（記録・分析データ）</b>を中心に、<b>訪問看護師・主治医・ケアマネジャー・利用者・ご家族</b>が最新の状態を共有。情報が届くことで信頼が生まれ、<b>紹介</b>と<b>職員の給料アップ</b>につながります。</span><span class="en">With Mintime's Watch-over AI (records &amp; analysis) at the center, visiting nurses, doctors, care managers, patients and families share the latest status. When information reaches everyone, trust grows — leading to more referrals and higher staff pay.</span></p>
       </div>
     </section>
 
