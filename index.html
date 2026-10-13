@@ -443,6 +443,60 @@
       </div>
     </section>
 
+    <!-- DIFFERENTIATION LOOP -->
+    <style>
+      #loop{ background: var(--bg-base); }
+      #loop .loop-sub{ max-width:780px; }
+      #loop .loop-flow{ display:grid; grid-template-columns: repeat(4, 1fr); gap:16px; margin:48px 0 0; align-items:stretch; }
+      #loop .lstep{ position:relative; background:#fff; border:1px solid var(--border); border-radius:var(--radius); padding:26px 18px 22px; text-align:center; box-shadow:var(--shadow-sm); }
+      #loop .lstep .licon{ font-size:1.9rem; line-height:1; margin-bottom:10px; }
+      #loop .lstep .lnum{ position:absolute; top:-13px; left:50%; transform:translateX(-50%); width:28px; height:28px; border-radius:50%; background:var(--green-primary); color:#fff; font-size:.82rem; font-weight:800; display:grid; place-items:center; box-shadow:0 2px 8px rgba(45,186,138,.4); }
+      #loop .lstep h4{ font-size:1rem; font-weight:800; color:var(--green-dark); margin-bottom:8px; }
+      #loop .lstep p{ font-size:.86rem; color:var(--text-mid); line-height:1.7; }
+      #loop .lstep.goal{ background:linear-gradient(160deg,#1a7a5e,#2aaa84); border-color:transparent; }
+      #loop .lstep.goal h4,#loop .lstep.goal p{ color:#fff; }
+      #loop .lstep.goal .lnum{ background:#fff; color:var(--green-dark); }
+      #loop .lstep:not(:last-child)::after{ content:'→'; position:absolute; right:-13px; top:50%; transform:translateY(-50%); color:var(--green-light); font-size:1.3rem; font-weight:900; z-index:2; }
+      #loop .loopback{ margin-top:18px; text-align:center; background:var(--green-pale); border:1px dashed var(--green-light); border-radius:50px; padding:12px 22px; font-size:.92rem; font-weight:800; color:var(--green-dark); }
+      #loop .loopnote{ margin-top:14px; font-size:.84rem; color:var(--text-soft); text-align:center; line-height:1.7; }
+      @media(max-width:760px){
+        #loop .loop-flow{ grid-template-columns:1fr; gap:26px; }
+        #loop .lstep:not(:last-child)::after{ content:'↓'; right:auto; left:50%; top:auto; bottom:-20px; transform:translateX(-50%); }
+      }
+    </style>
+    <section id="loop" class="section">
+      <div class="section-inner">
+        <span class="section-label">Why Mintime</span>
+        <h2 class="about-title"><span class="ja">「見守りAI」と「依頼者との関係」が生む好循環</span><span class="en">A Virtuous Cycle: Watch-over AI × Referrer Relationships</span></h2>
+        <p class="section-sub loop-sub"><span class="ja">一般の電子カルテは「記録の効率化」で終わります。Mintimeは、見守りAIが見える化した"変化"を医師・ケアマネ・ご家族と共有し、信頼と紹介を増やし、職員の給料アップにつなげます。</span><span class="en">Conventional EMRs stop at "making records efficient." Mintime shares the changes its Watch-over AI brings to light with doctors, care managers and families — building trust, increasing referrals, and raising staff pay.</span></p>
+
+        <div class="loop-flow">
+          <div class="lstep">
+            <span class="lnum">1</span><div class="licon">🩺</div>
+            <h4><span class="ja">見守りAI</span><span class="en">Watch-over AI</span></h4>
+            <p><span class="ja">血圧（上・下）・脈拍・体温・SpO2——5つのバイタルを同時に見える化。</span><span class="en">Visualizes five vital signs at once: blood pressure (systolic/diastolic), pulse, temperature and SpO2.</span></p>
+          </div>
+          <div class="lstep">
+            <span class="lnum">2</span><div class="licon">🤝</div>
+            <h4><span class="ja">届ける・共有</span><span class="en">Share with Experts</span></h4>
+            <p><span class="ja">その変化を医師・ケアマネ・ご家族へ。判断できる専門職に"届く"ことに価値があります。</span><span class="en">Delivers those changes to doctors, care managers and families — the value lies in reaching the professionals who can read them.</span></p>
+          </div>
+          <div class="lstep">
+            <span class="lnum">3</span><div class="licon">📈</div>
+            <h4><span class="ja">信頼・紹介が増える</span><span class="en">Trust &amp; Referrals Grow</span></h4>
+            <p><span class="ja">「ちゃんと見てくれている」という安心が、次の依頼・紹介につながります。</span><span class="en">The reassurance that "they're watching closely" leads to the next referral.</span></p>
+          </div>
+          <div class="lstep goal">
+            <span class="lnum">4</span><div class="licon">💰</div>
+            <h4><span class="ja">職員の給料アップ</span><span class="en">Higher Staff Pay</span></h4>
+            <p><span class="ja">訪問が増え事業が伸びることで、働く職員の処遇（給料）が上がります。</span><span class="en">More visits and a growing business raise compensation for the staff who do the work.</span></p>
+          </div>
+        </div>
+        <div class="loopback"><span class="ja">↻ この循環がくりかえされ、使うほど強くなる</span><span class="en">↻ The cycle repeats — the more you use it, the stronger it gets</span></div>
+        <p class="loopnote"><span class="ja">さらに、既往歴・傷病名の蓄積により、バイタルの変化と傷病の関係が統計データとして見えてきます（＝未病ケアへ）。</span><span class="en">As medical histories and diagnoses accumulate, statistical relationships between vital-sign changes and conditions emerge — moving toward preventive, pre-symptomatic care.</span></p>
+      </div>
+    </section>
+
     <!-- ABOUT -->
     <section id="about" class="section" style="background:var(--bg-white);">
       <div class="section-inner">
