@@ -442,6 +442,39 @@
       </div>
     </section>
 
+    <!-- 3 PILLARS -->
+    <style>
+      #pillars{ background: var(--bg-white); }
+      #pillars .pillars-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+      @media(max-width:820px){ #pillars .pillars-grid{ grid-template-columns:1fr; } }
+      #pillars .pillar{ background:#fff; border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow-sm); padding:34px 28px; text-align:center; transition:box-shadow .25s, transform .2s; }
+      #pillars .pillar:hover{ box-shadow:var(--shadow-lg); transform:translateY(-4px); }
+      #pillars .p-icon{ width:66px; height:66px; margin:0 auto 18px; border-radius:50%; background:var(--green-pale); display:grid; place-items:center; font-size:2rem; }
+      #pillars .pillar h3{ font-size:1.2rem; font-weight:800; color:var(--green-dark); margin-bottom:10px; }
+      #pillars .pillar p{ font-size:.93rem; color:var(--text-mid); line-height:1.85; }
+    </style>
+    <section id="pillars" class="section">
+      <div class="section-inner">
+        <div class="pillars-grid">
+          <div class="pillar">
+            <div class="p-icon">📝</div>
+            <h3>生成AIで業務を削減</h3>
+            <p>記録書・計画書・報告書をAIが自動作成。職員の記録時間を大幅に減らします。</p>
+          </div>
+          <div class="pillar">
+            <div class="p-icon">🩺</div>
+            <h3>見守りAIで質を改善</h3>
+            <p>5つのバイタルを同時に見て変化に早く気づき、関係者みんなで見守ります。</p>
+          </div>
+          <div class="pillar">
+            <div class="p-icon">📈</div>
+            <h3>営業で利益を増加</h3>
+            <p>依頼者との連携・空き状況の共有で紹介を増やし、事業所の利益につなげます。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- GENERATIVE AI -->
     <section id="generative-ai" class="section">
       <div class="section-inner">
